@@ -1,0 +1,31 @@
+{
+  "name": "foodio",
+  "version": "1.0.0",
+  "description": "Search delicious recipes to create tasty food",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eakyel/foodio.git"
+  },
+  "keywords": [
+    "recipes",
+    "food"
+  ],
+  "author": "Erhan Akyel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eakyel/foodio/issues"
+  },
+  "homepage": "https://github.com/eakyel/foodio#readme",
+  "devDependencies": {
+    "@parcel/babel-plugin-transform-runtime": "^2.0.0-nightly.1823",
+    "@parcel/babel-preset-env": "^2.0.0-beta.2",
+    "@parcel/transformer-sass": "^2.0.0-beta.2",
+    "parcel": "^2.0.0-beta.2"
+  }
+}
