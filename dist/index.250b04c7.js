@@ -670,23 +670,31 @@ var showRecipe = /*#__PURE__*/(function () {
             _context.prev = 0;
             // Get hash from the url
             id = window.location.hash.slice(1);
-            _context.next = 4;
-            return _modelJs.loadRecipe(id);
+            if (id) {
+              _context.next = 4;
+              break;
+            }
+            return _context.abrupt("return");
           case 4:
-            // 2) # Rendering Recipe
-            _viewsRecipeViewJsDefault.default.render(_modelJs.state.recipe);
-            _context.next = 10;
-            break;
+            // 1) # Render spinner before getting data
+            _viewsRecipeViewJsDefault.default.renderSpinner();
+            _context.next = 7;
+            return _modelJs.loadRecipe(id);
           case 7:
-            _context.prev = 7;
+            // 3) # Rendering Recipe
+            _viewsRecipeViewJsDefault.default.render(_modelJs.state.recipe);
+            _context.next = 13;
+            break;
+          case 10:
+            _context.prev = 10;
             _context.t0 = _context["catch"](0);
             console.log(_context.t0);
-          case 10:
+          case 13:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 7]]);
+    }, _callee, null, [[0, 10]]);
   }));
   return function showRecipe() {
     return _ref.apply(this, arguments);
@@ -12112,6 +12120,13 @@ var RecipeView = /*#__PURE__*/(function () {
       // # Delete content before inject new content
       this._clear();
       // # Inject new content
+      this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+  }, {
+    key: "renderSpinner",
+    value: function renderSpinner() {
+      var markup = ("\n    <div class=\"spinner\">\n        <svg>\n        <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-loader\"></use>\n        </svg>\n    </div>\n    ");
+      this._clear();
       this._parentElement.insertAdjacentHTML('afterbegin', markup);
     }
   }, {

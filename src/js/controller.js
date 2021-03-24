@@ -11,10 +11,16 @@ const showRecipe = async function () {
     // Get hash from the url
     const id = window.location.hash.slice(1);
 
-    // 1) # Calling recipe from API
+    // # Guard clause
+    if (!id) return;
+
+    // 1) # Render spinner before getting data
+    recipeView.renderSpinner();
+
+    // 2) # Calling recipe from API
     await model.loadRecipe(id);
 
-    // 2) # Rendering Recipe
+    // 3) # Rendering Recipe
     recipeView.render(model.state.recipe);
   } catch (error) {
     console.log(error);
