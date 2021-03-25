@@ -12093,7 +12093,11 @@ _parcelHelpers.defineInteropFlag(exports);
 _parcelHelpers.export(exports, "API_URL", function () {
   return API_URL;
 });
+_parcelHelpers.export(exports, "TIMEOUT_SEC", function () {
+  return TIMEOUT_SEC;
+});
 var API_URL = 'https://forkify-api.herokuapp.com/api/v2/recipes/';
+var TIMEOUT_SEC = 10;
 
 },{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"dSCNX":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
@@ -12105,6 +12109,14 @@ var _babelRuntimeHelpersAsyncToGenerator = require("@babel/runtime/helpers/async
 var _babelRuntimeHelpersAsyncToGeneratorDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersAsyncToGenerator);
 var _babelRuntimeRegenerator = require("@babel/runtime/regenerator");
 var _babelRuntimeRegeneratorDefault = _parcelHelpers.interopDefault(_babelRuntimeRegenerator);
+var _configJs = require('./config.js');
+var timeout = function timeout(s) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error(("Request took too long! Timeout after ").concat(s, " second")));
+    }, s * 1000);
+  });
+};
 var getJSON = /*#__PURE__*/(function () {
   var _ref = _babelRuntimeHelpersAsyncToGeneratorDefault.default(/*#__PURE__*/_babelRuntimeRegeneratorDefault.default.mark(function _callee(url) {
     var res, data;
@@ -12114,7 +12126,7 @@ var getJSON = /*#__PURE__*/(function () {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return fetch(url);
+            return Promise.race([fetch(url), timeout(_configJs.TIMEOUT_SEC)]);
           case 3:
             res = _context.sent;
             _context.next = 6;
@@ -12144,7 +12156,7 @@ var getJSON = /*#__PURE__*/(function () {
   };
 })();
 
-},{"@babel/runtime/helpers/asyncToGenerator":"7vj2t","@babel/runtime/regenerator":"4KKBo","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"9e6b9":[function(require,module,exports) {
+},{"@babel/runtime/helpers/asyncToGenerator":"7vj2t","@babel/runtime/regenerator":"4KKBo","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","./config.js":"6pr2F"}],"9e6b9":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 var _babelRuntimeHelpersClassCallCheck = require("@babel/runtime/helpers/classCallCheck");
