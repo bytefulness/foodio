@@ -12036,31 +12036,23 @@ var _babelRuntimeHelpersAsyncToGenerator = require("@babel/runtime/helpers/async
 var _babelRuntimeHelpersAsyncToGeneratorDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersAsyncToGenerator);
 var _babelRuntimeRegenerator = require("@babel/runtime/regenerator");
 var _babelRuntimeRegeneratorDefault = _parcelHelpers.interopDefault(_babelRuntimeRegenerator);
+var _configJs = require('./config.js');
+var _helperJs = require('./helper.js');
 var state = {
   recipe: {}
 };
 var loadRecipe = /*#__PURE__*/(function () {
   var _ref = _babelRuntimeHelpersAsyncToGeneratorDefault.default(/*#__PURE__*/_babelRuntimeRegeneratorDefault.default.mark(function _callee(id) {
-    var res, data, recipe;
+    var data, recipe;
     return _babelRuntimeRegeneratorDefault.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
             _context.next = 3;
-            return fetch(("https://forkify-api.herokuapp.com/api/v2/recipes/").concat(id));
+            return _helperJs.getJSON(("").concat(_configJs.API_URL).concat(id));
           case 3:
-            res = _context.sent;
-            _context.next = 6;
-            return res.json();
-          case 6:
             data = _context.sent;
-            if (res.ok) {
-              _context.next = 9;
-              break;
-            }
-            throw new Error(("").concat(data.message, " (").concat(res.status, ")"));
-          case 9:
             console.log(data);
             // # Change object keyname format
             // ## Define as let to change later
@@ -12077,20 +12069,77 @@ var loadRecipe = /*#__PURE__*/(function () {
               ingredients: recipe.ingredients
             };
             console.log(state.recipe);
-            _context.next = 18;
+            _context.next = 13;
             break;
-          case 15:
-            _context.prev = 15;
+          case 10:
+            _context.prev = 10;
             _context.t0 = _context["catch"](0);
             console.log(_context.t0);
-          case 18:
+          case 13:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 15]]);
+    }, _callee, null, [[0, 10]]);
   }));
   return function loadRecipe(_x) {
+    return _ref.apply(this, arguments);
+  };
+})();
+
+},{"@babel/runtime/helpers/asyncToGenerator":"7vj2t","@babel/runtime/regenerator":"4KKBo","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","./config.js":"6pr2F","./helper.js":"dSCNX"}],"6pr2F":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "API_URL", function () {
+  return API_URL;
+});
+var API_URL = 'https://forkify-api.herokuapp.com/api/v2/recipes/';
+
+},{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"dSCNX":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "getJSON", function () {
+  return getJSON;
+});
+var _babelRuntimeHelpersAsyncToGenerator = require("@babel/runtime/helpers/asyncToGenerator");
+var _babelRuntimeHelpersAsyncToGeneratorDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersAsyncToGenerator);
+var _babelRuntimeRegenerator = require("@babel/runtime/regenerator");
+var _babelRuntimeRegeneratorDefault = _parcelHelpers.interopDefault(_babelRuntimeRegenerator);
+var getJSON = /*#__PURE__*/(function () {
+  var _ref = _babelRuntimeHelpersAsyncToGeneratorDefault.default(/*#__PURE__*/_babelRuntimeRegeneratorDefault.default.mark(function _callee(url) {
+    var res, data;
+    return _babelRuntimeRegeneratorDefault.default.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return fetch(url);
+          case 3:
+            res = _context.sent;
+            _context.next = 6;
+            return res.json();
+          case 6:
+            data = _context.sent;
+            if (res.ok) {
+              _context.next = 9;
+              break;
+            }
+            throw new Error(("").concat(data.message, " (").concat(res.status, ")"));
+          case 9:
+            return _context.abrupt("return", data);
+          case 12:
+            _context.prev = 12;
+            _context.t0 = _context["catch"](0);
+            throw _context.t0;
+          case 15:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 12]]);
+  }));
+  return function getJSON(_x) {
     return _ref.apply(this, arguments);
   };
 })();
