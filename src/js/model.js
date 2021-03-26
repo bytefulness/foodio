@@ -7,9 +7,8 @@ export const state = {
 
 export const loadRecipe = async function (id) {
   try {
+    // # Calling recipe from API
     const data = await getJSON(`${API_URL}${id}`);
-
-    console.log(data);
 
     // # Change object keyname format
 
@@ -27,8 +26,7 @@ export const loadRecipe = async function (id) {
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
     };
-    console.log(state.recipe);
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
