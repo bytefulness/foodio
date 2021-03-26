@@ -17,6 +17,13 @@ class RecipeView {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
+  // Publishers
+  addHandleRender(handler) {
+    ['hashchange', 'load'].forEach(event =>
+      window.addEventListener(event, handler)
+    );
+  }
+
   renderSpinner() {
     const markup = `
     <div class="spinner">
