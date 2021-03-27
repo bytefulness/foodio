@@ -5,6 +5,7 @@ import 'regenerator-runtime/runtime';
 import icons from 'url:../img/icons.svg';
 import * as model from './model.js';
 import recipeView from './views/recipeView.js';
+import searchView from './views/searchView.js';
 
 const controlRecipes = async function () {
   try {
@@ -27,8 +28,25 @@ const controlRecipes = async function () {
   }
 };
 
+const controlSearchResults = async function () {
+  try {
+    // 1) Get search query
+    const query = searchView.getQuery();
+    if (!query) return;
+
+    // 2) Load search results
+    await model.loadSearchResults(query);
+
+    // 3) Render results
+    console.log(model.state.search.results);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const init = function () {
   // Subscribers
   recipeView.addHandleRender(controlRecipes);
+  searchView.addHandlerSearch(controlSearchResults);
 };
 init();
