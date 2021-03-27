@@ -662,6 +662,8 @@ var _viewsRecipeViewJs = require('./views/recipeView.js');
 var _viewsRecipeViewJsDefault = _parcelHelpers.interopDefault(_viewsRecipeViewJs);
 var _viewsSearchViewJs = require('./views/searchView.js');
 var _viewsSearchViewJsDefault = _parcelHelpers.interopDefault(_viewsSearchViewJs);
+var _viewsResultsViewJs = require('./views/resultsView.js');
+var _viewsResultsViewJsDefault = _parcelHelpers.interopDefault(_viewsResultsViewJs);
 var controlRecipes = /*#__PURE__*/(function () {
   var _ref = _babelRuntimeHelpersAsyncToGeneratorDefault.default(/*#__PURE__*/_babelRuntimeRegeneratorDefault.default.mark(function _callee() {
     var id;
@@ -723,18 +725,19 @@ var controlSearchResults = /*#__PURE__*/(function () {
           case 6:
             // 3) Render results
             console.log(_modelJs.state.search.results);
-            _context2.next = 12;
+            _viewsResultsViewJsDefault.default.render(_modelJs.state.search.results);
+            _context2.next = 13;
             break;
-          case 9:
-            _context2.prev = 9;
+          case 10:
+            _context2.prev = 10;
             _context2.t0 = _context2["catch"](0);
             console.log(_context2.t0);
-          case 12:
+          case 13:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 9]]);
+    }, _callee2, null, [[0, 10]]);
   }));
   return function controlSearchResults() {
     return _ref2.apply(this, arguments);
@@ -742,12 +745,12 @@ var controlSearchResults = /*#__PURE__*/(function () {
 })();
 var init = function init() {
   // Subscribers
-  _viewsRecipeViewJsDefault.default.addHandleRender(controlRecipes);
+  _viewsRecipeViewJsDefault.default.addHandlerRender(controlRecipes);
   _viewsSearchViewJsDefault.default.addHandlerSearch(controlSearchResults);
 };
 init();
 
-},{"@babel/runtime/helpers/asyncToGenerator":"7vj2t","@babel/runtime/regenerator":"4KKBo","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","core-js/modules/es.symbol.js":"3DShI","core-js/modules/es.symbol.description.js":"7be2j","core-js/modules/es.symbol.async-iterator.js":"7Mklu","core-js/modules/es.symbol.has-instance.js":"4zvPK","core-js/modules/es.symbol.is-concat-spreadable.js":"HpaRo","core-js/modules/es.symbol.iterator.js":"dzvZJ","core-js/modules/es.symbol.match.js":"2x9kW","core-js/modules/es.symbol.replace.js":"1onSc","core-js/modules/es.symbol.search.js":"6wTv9","core-js/modules/es.symbol.species.js":"9Pe7d","core-js/modules/es.symbol.split.js":"1yIMx","core-js/modules/es.symbol.to-primitive.js":"6WXZo","core-js/modules/es.symbol.to-string-tag.js":"2FJJL","core-js/modules/es.symbol.unscopables.js":"2aY6R","core-js/modules/es.array.concat.js":"7GpR1","core-js/modules/es.array.copy-within.js":"5WE84","core-js/modules/es.array.every.js":"5Y5Wu","core-js/modules/es.array.fill.js":"4DgK8","core-js/modules/es.array.filter.js":"6lPy8","core-js/modules/es.array.find.js":"6JyvU","core-js/modules/es.array.find-index.js":"6n28B","core-js/modules/es.array.flat.js":"3eRG5","core-js/modules/es.array.flat-map.js":"1j6sI","core-js/modules/es.array.for-each.js":"1uGSR","core-js/modules/es.array.from.js":"drpwf","core-js/modules/es.array.includes.js":"570Fu","core-js/modules/es.array.index-of.js":"6WSIB","core-js/modules/es.array.is-array.js":"1OCD2","core-js/modules/es.array.iterator.js":"4Ngo5","core-js/modules/es.array.join.js":"7IMuG","core-js/modules/es.array.last-index-of.js":"1HmPU","core-js/modules/es.array.map.js":"7KZ6O","core-js/modules/es.array.of.js":"1ThkE","core-js/modules/es.array.reduce.js":"6ECkF","core-js/modules/es.array.reduce-right.js":"6YTJG","core-js/modules/es.array.reverse.js":"YSU7n","core-js/modules/es.array.slice.js":"6rsJe","core-js/modules/es.array.some.js":"4Puoj","core-js/modules/es.array.sort.js":"cwhnj","core-js/modules/es.array.species.js":"7gH9l","core-js/modules/es.array.splice.js":"269HQ","core-js/modules/es.array.unscopables.flat.js":"2nueg","core-js/modules/es.array.unscopables.flat-map.js":"YXZAo","core-js/modules/es.array-buffer.constructor.js":"5rtVi","core-js/modules/es.array-buffer.is-view.js":"4FNXK","core-js/modules/es.array-buffer.slice.js":"1lPmz","core-js/modules/es.data-view.js":"1feiP","core-js/modules/es.date.now.js":"6JKLf","core-js/modules/es.date.to-iso-string.js":"7acFn","core-js/modules/es.date.to-json.js":"6nv39","core-js/modules/es.date.to-primitive.js":"46PUF","core-js/modules/es.date.to-string.js":"RFOxU","core-js/modules/es.function.bind.js":"5Jqrb","core-js/modules/es.function.has-instance.js":"3JpsF","core-js/modules/es.function.name.js":"3Y953","core-js/modules/es.json.to-string-tag.js":"6mgzp","core-js/modules/es.map.js":"3BzdB","core-js/modules/es.math.acosh.js":"2IuFS","core-js/modules/es.math.asinh.js":"6DU9g","core-js/modules/es.math.atanh.js":"5gIqs","core-js/modules/es.math.cbrt.js":"5HR91","core-js/modules/es.math.clz32.js":"1tI3h","core-js/modules/es.math.cosh.js":"2cmLo","core-js/modules/es.math.expm1.js":"74p0t","core-js/modules/es.math.fround.js":"15ONC","core-js/modules/es.math.hypot.js":"6kMJg","core-js/modules/es.math.imul.js":"4JlYu","core-js/modules/es.math.log10.js":"3FHkM","core-js/modules/es.math.log1p.js":"6w0zG","core-js/modules/es.math.log2.js":"2zFpi","core-js/modules/es.math.sign.js":"2hTpk","core-js/modules/es.math.sinh.js":"57FRK","core-js/modules/es.math.tanh.js":"7AkoI","core-js/modules/es.math.to-string-tag.js":"5jN1m","core-js/modules/es.math.trunc.js":"7DWxp","core-js/modules/es.number.constructor.js":"2IcTj","core-js/modules/es.number.epsilon.js":"7c2FR","core-js/modules/es.number.is-finite.js":"TLMBJ","core-js/modules/es.number.is-integer.js":"3ND1x","core-js/modules/es.number.is-nan.js":"4M61H","core-js/modules/es.number.is-safe-integer.js":"2MxsS","core-js/modules/es.number.max-safe-integer.js":"3c9rF","core-js/modules/es.number.min-safe-integer.js":"23AuK","core-js/modules/es.number.parse-float.js":"42i9F","core-js/modules/es.number.parse-int.js":"4V9Gx","core-js/modules/es.number.to-fixed.js":"32ybv","core-js/modules/es.number.to-precision.js":"VJgbt","core-js/modules/es.object.assign.js":"45fUw","core-js/modules/es.object.create.js":"cJP9R","core-js/modules/es.object.define-getter.js":"2IHqf","core-js/modules/es.object.define-properties.js":"1tIgn","core-js/modules/es.object.define-property.js":"15G5E","core-js/modules/es.object.define-setter.js":"9P4ss","core-js/modules/es.object.entries.js":"5UrAU","core-js/modules/es.object.freeze.js":"WaUPL","core-js/modules/es.object.from-entries.js":"5Qdjn","core-js/modules/es.object.get-own-property-descriptor.js":"7KMRs","core-js/modules/es.object.get-own-property-descriptors.js":"nT9j3","core-js/modules/es.object.get-own-property-names.js":"17WOR","core-js/modules/es.object.get-prototype-of.js":"6UXpe","core-js/modules/es.object.is.js":"47BkP","core-js/modules/es.object.is-extensible.js":"4A7FH","core-js/modules/es.object.is-frozen.js":"1KkCl","core-js/modules/es.object.is-sealed.js":"4QXu1","core-js/modules/es.object.keys.js":"zomC5","core-js/modules/es.object.lookup-getter.js":"6V0LQ","core-js/modules/es.object.lookup-setter.js":"4coNt","core-js/modules/es.object.prevent-extensions.js":"7fh8F","core-js/modules/es.object.seal.js":"1pTDj","core-js/modules/es.object.set-prototype-of.js":"2F4Ik","core-js/modules/es.object.to-string.js":"6QtYO","core-js/modules/es.object.values.js":"7gF40","core-js/modules/es.parse-float.js":"fNaKs","core-js/modules/es.parse-int.js":"6gNK2","core-js/modules/es.promise.js":"GERqx","core-js/modules/es.promise.finally.js":"7wFUE","core-js/modules/es.reflect.apply.js":"1bxm5","core-js/modules/es.reflect.construct.js":"kji05","core-js/modules/es.reflect.define-property.js":"2lXby","core-js/modules/es.reflect.delete-property.js":"57oZ8","core-js/modules/es.reflect.get.js":"3GFYA","core-js/modules/es.reflect.get-own-property-descriptor.js":"3MVyg","core-js/modules/es.reflect.get-prototype-of.js":"6ajRS","core-js/modules/es.reflect.has.js":"48sW7","core-js/modules/es.reflect.is-extensible.js":"14tuC","core-js/modules/es.reflect.own-keys.js":"18GEu","core-js/modules/es.reflect.prevent-extensions.js":"7tetv","core-js/modules/es.reflect.set.js":"6t3CH","core-js/modules/es.reflect.set-prototype-of.js":"2sCV4","core-js/modules/es.regexp.constructor.js":"V1dLH","core-js/modules/es.regexp.exec.js":"3y9v7","core-js/modules/es.regexp.flags.js":"1x14V","core-js/modules/es.regexp.to-string.js":"2YnJv","core-js/modules/es.set.js":"45A1i","core-js/modules/es.string.code-point-at.js":"KjisB","core-js/modules/es.string.ends-with.js":"3VlaV","core-js/modules/es.string.from-code-point.js":"2eZAG","core-js/modules/es.string.includes.js":"lkI9x","core-js/modules/es.string.iterator.js":"5WvFl","core-js/modules/es.string.match.js":"6pHLn","core-js/modules/es.string.pad-end.js":"7MbUJ","core-js/modules/es.string.pad-start.js":"6wqhe","core-js/modules/es.string.raw.js":"1CdU8","core-js/modules/es.string.repeat.js":"4WXVZ","core-js/modules/es.string.replace.js":"2iTl6","core-js/modules/es.string.search.js":"6nyMW","core-js/modules/es.string.split.js":"64exK","core-js/modules/es.string.starts-with.js":"6h2Lf","core-js/modules/es.string.trim.js":"2V1KE","core-js/modules/es.string.trim-end.js":"5GKFZ","core-js/modules/es.string.trim-start.js":"2gZGA","core-js/modules/es.string.anchor.js":"3hKur","core-js/modules/es.string.big.js":"2ccGO","core-js/modules/es.string.blink.js":"4bG66","core-js/modules/es.string.bold.js":"7elf3","core-js/modules/es.string.fixed.js":"6MThk","core-js/modules/es.string.fontcolor.js":"h1fJb","core-js/modules/es.string.fontsize.js":"2V4CV","core-js/modules/es.string.italics.js":"4pkfR","core-js/modules/es.string.link.js":"6O5K7","core-js/modules/es.string.small.js":"72xif","core-js/modules/es.string.strike.js":"stJIc","core-js/modules/es.string.sub.js":"73CXV","core-js/modules/es.string.sup.js":"6FXoa","core-js/modules/es.typed-array.float32-array.js":"2rpR3","core-js/modules/es.typed-array.float64-array.js":"5DAAO","core-js/modules/es.typed-array.int8-array.js":"3oGj0","core-js/modules/es.typed-array.int16-array.js":"1UdDp","core-js/modules/es.typed-array.int32-array.js":"29qk8","core-js/modules/es.typed-array.uint8-array.js":"3D99S","core-js/modules/es.typed-array.uint8-clamped-array.js":"4q9wR","core-js/modules/es.typed-array.uint16-array.js":"5zmqI","core-js/modules/es.typed-array.uint32-array.js":"11vWZ","core-js/modules/es.typed-array.copy-within.js":"1WlqG","core-js/modules/es.typed-array.every.js":"381MD","core-js/modules/es.typed-array.fill.js":"6eTDh","core-js/modules/es.typed-array.filter.js":"57OgQ","core-js/modules/es.typed-array.find.js":"mPCiV","core-js/modules/es.typed-array.find-index.js":"5bzHg","core-js/modules/es.typed-array.for-each.js":"1AGxq","core-js/modules/es.typed-array.from.js":"6uezR","core-js/modules/es.typed-array.includes.js":"3MW82","core-js/modules/es.typed-array.index-of.js":"1bmpY","core-js/modules/es.typed-array.iterator.js":"2uTtj","core-js/modules/es.typed-array.join.js":"6daJ5","core-js/modules/es.typed-array.last-index-of.js":"viVbQ","core-js/modules/es.typed-array.map.js":"78tZp","core-js/modules/es.typed-array.of.js":"1jvfQ","core-js/modules/es.typed-array.reduce.js":"s1upg","core-js/modules/es.typed-array.reduce-right.js":"6YNtT","core-js/modules/es.typed-array.reverse.js":"2w4fW","core-js/modules/es.typed-array.set.js":"26oyN","core-js/modules/es.typed-array.slice.js":"4wp7C","core-js/modules/es.typed-array.some.js":"1SDUb","core-js/modules/es.typed-array.sort.js":"5DtH6","core-js/modules/es.typed-array.subarray.js":"1ZRhL","core-js/modules/es.typed-array.to-locale-string.js":"1kMnd","core-js/modules/es.typed-array.to-string.js":"6bzC4","core-js/modules/es.weak-map.js":"XcaBC","core-js/modules/es.weak-set.js":"1xRLP","core-js/modules/web.dom-collections.for-each.js":"4R0aZ","core-js/modules/web.dom-collections.iterator.js":"3GR48","core-js/modules/web.immediate.js":"3NSxt","core-js/modules/web.queue-microtask.js":"3nwlD","core-js/modules/web.timers.js":"GLPyh","core-js/modules/web.url.js":"1CNX6","core-js/modules/web.url.to-json.js":"1bch0","core-js/modules/web.url-search-params.js":"4tznt","regenerator-runtime/runtime":"62Qib","url:../img/icons.svg":"3t5dV","./model.js":"1hp6y","./views/recipeView.js":"9e6b9","./views/searchView.js":"3rYQ6"}],"7vj2t":[function(require,module,exports) {
+},{"@babel/runtime/helpers/asyncToGenerator":"7vj2t","@babel/runtime/regenerator":"4KKBo","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","core-js/modules/es.symbol.js":"3DShI","core-js/modules/es.symbol.description.js":"7be2j","core-js/modules/es.symbol.async-iterator.js":"7Mklu","core-js/modules/es.symbol.has-instance.js":"4zvPK","core-js/modules/es.symbol.is-concat-spreadable.js":"HpaRo","core-js/modules/es.symbol.iterator.js":"dzvZJ","core-js/modules/es.symbol.match.js":"2x9kW","core-js/modules/es.symbol.replace.js":"1onSc","core-js/modules/es.symbol.search.js":"6wTv9","core-js/modules/es.symbol.species.js":"9Pe7d","core-js/modules/es.symbol.split.js":"1yIMx","core-js/modules/es.symbol.to-primitive.js":"6WXZo","core-js/modules/es.symbol.to-string-tag.js":"2FJJL","core-js/modules/es.symbol.unscopables.js":"2aY6R","core-js/modules/es.array.concat.js":"7GpR1","core-js/modules/es.array.copy-within.js":"5WE84","core-js/modules/es.array.every.js":"5Y5Wu","core-js/modules/es.array.fill.js":"4DgK8","core-js/modules/es.array.filter.js":"6lPy8","core-js/modules/es.array.find.js":"6JyvU","core-js/modules/es.array.find-index.js":"6n28B","core-js/modules/es.array.flat.js":"3eRG5","core-js/modules/es.array.flat-map.js":"1j6sI","core-js/modules/es.array.for-each.js":"1uGSR","core-js/modules/es.array.from.js":"drpwf","core-js/modules/es.array.includes.js":"570Fu","core-js/modules/es.array.index-of.js":"6WSIB","core-js/modules/es.array.is-array.js":"1OCD2","core-js/modules/es.array.iterator.js":"4Ngo5","core-js/modules/es.array.join.js":"7IMuG","core-js/modules/es.array.last-index-of.js":"1HmPU","core-js/modules/es.array.map.js":"7KZ6O","core-js/modules/es.array.of.js":"1ThkE","core-js/modules/es.array.reduce.js":"6ECkF","core-js/modules/es.array.reduce-right.js":"6YTJG","core-js/modules/es.array.reverse.js":"YSU7n","core-js/modules/es.array.slice.js":"6rsJe","core-js/modules/es.array.some.js":"4Puoj","core-js/modules/es.array.sort.js":"cwhnj","core-js/modules/es.array.species.js":"7gH9l","core-js/modules/es.array.splice.js":"269HQ","core-js/modules/es.array.unscopables.flat.js":"2nueg","core-js/modules/es.array.unscopables.flat-map.js":"YXZAo","core-js/modules/es.array-buffer.constructor.js":"5rtVi","core-js/modules/es.array-buffer.is-view.js":"4FNXK","core-js/modules/es.array-buffer.slice.js":"1lPmz","core-js/modules/es.data-view.js":"1feiP","core-js/modules/es.date.now.js":"6JKLf","core-js/modules/es.date.to-iso-string.js":"7acFn","core-js/modules/es.date.to-json.js":"6nv39","core-js/modules/es.date.to-primitive.js":"46PUF","core-js/modules/es.date.to-string.js":"RFOxU","core-js/modules/es.function.bind.js":"5Jqrb","core-js/modules/es.function.has-instance.js":"3JpsF","core-js/modules/es.function.name.js":"3Y953","core-js/modules/es.json.to-string-tag.js":"6mgzp","core-js/modules/es.map.js":"3BzdB","core-js/modules/es.math.acosh.js":"2IuFS","core-js/modules/es.math.asinh.js":"6DU9g","core-js/modules/es.math.atanh.js":"5gIqs","core-js/modules/es.math.cbrt.js":"5HR91","core-js/modules/es.math.clz32.js":"1tI3h","core-js/modules/es.math.cosh.js":"2cmLo","core-js/modules/es.math.expm1.js":"74p0t","core-js/modules/es.math.fround.js":"15ONC","core-js/modules/es.math.hypot.js":"6kMJg","core-js/modules/es.math.imul.js":"4JlYu","core-js/modules/es.math.log10.js":"3FHkM","core-js/modules/es.math.log1p.js":"6w0zG","core-js/modules/es.math.log2.js":"2zFpi","core-js/modules/es.math.sign.js":"2hTpk","core-js/modules/es.math.sinh.js":"57FRK","core-js/modules/es.math.tanh.js":"7AkoI","core-js/modules/es.math.to-string-tag.js":"5jN1m","core-js/modules/es.math.trunc.js":"7DWxp","core-js/modules/es.number.constructor.js":"2IcTj","core-js/modules/es.number.epsilon.js":"7c2FR","core-js/modules/es.number.is-finite.js":"TLMBJ","core-js/modules/es.number.is-integer.js":"3ND1x","core-js/modules/es.number.is-nan.js":"4M61H","core-js/modules/es.number.is-safe-integer.js":"2MxsS","core-js/modules/es.number.max-safe-integer.js":"3c9rF","core-js/modules/es.number.min-safe-integer.js":"23AuK","core-js/modules/es.number.parse-float.js":"42i9F","core-js/modules/es.number.parse-int.js":"4V9Gx","core-js/modules/es.number.to-fixed.js":"32ybv","core-js/modules/es.number.to-precision.js":"VJgbt","core-js/modules/es.object.assign.js":"45fUw","core-js/modules/es.object.create.js":"cJP9R","core-js/modules/es.object.define-getter.js":"2IHqf","core-js/modules/es.object.define-properties.js":"1tIgn","core-js/modules/es.object.define-property.js":"15G5E","core-js/modules/es.object.define-setter.js":"9P4ss","core-js/modules/es.object.entries.js":"5UrAU","core-js/modules/es.object.freeze.js":"WaUPL","core-js/modules/es.object.from-entries.js":"5Qdjn","core-js/modules/es.object.get-own-property-descriptor.js":"7KMRs","core-js/modules/es.object.get-own-property-descriptors.js":"nT9j3","core-js/modules/es.object.get-own-property-names.js":"17WOR","core-js/modules/es.object.get-prototype-of.js":"6UXpe","core-js/modules/es.object.is.js":"47BkP","core-js/modules/es.object.is-extensible.js":"4A7FH","core-js/modules/es.object.is-frozen.js":"1KkCl","core-js/modules/es.object.is-sealed.js":"4QXu1","core-js/modules/es.object.keys.js":"zomC5","core-js/modules/es.object.lookup-getter.js":"6V0LQ","core-js/modules/es.object.lookup-setter.js":"4coNt","core-js/modules/es.object.prevent-extensions.js":"7fh8F","core-js/modules/es.object.seal.js":"1pTDj","core-js/modules/es.object.set-prototype-of.js":"2F4Ik","core-js/modules/es.object.to-string.js":"6QtYO","core-js/modules/es.object.values.js":"7gF40","core-js/modules/es.parse-float.js":"fNaKs","core-js/modules/es.parse-int.js":"6gNK2","core-js/modules/es.promise.js":"GERqx","core-js/modules/es.promise.finally.js":"7wFUE","core-js/modules/es.reflect.apply.js":"1bxm5","core-js/modules/es.reflect.construct.js":"kji05","core-js/modules/es.reflect.define-property.js":"2lXby","core-js/modules/es.reflect.delete-property.js":"57oZ8","core-js/modules/es.reflect.get.js":"3GFYA","core-js/modules/es.reflect.get-own-property-descriptor.js":"3MVyg","core-js/modules/es.reflect.get-prototype-of.js":"6ajRS","core-js/modules/es.reflect.has.js":"48sW7","core-js/modules/es.reflect.is-extensible.js":"14tuC","core-js/modules/es.reflect.own-keys.js":"18GEu","core-js/modules/es.reflect.prevent-extensions.js":"7tetv","core-js/modules/es.reflect.set.js":"6t3CH","core-js/modules/es.reflect.set-prototype-of.js":"2sCV4","core-js/modules/es.regexp.constructor.js":"V1dLH","core-js/modules/es.regexp.exec.js":"3y9v7","core-js/modules/es.regexp.flags.js":"1x14V","core-js/modules/es.regexp.to-string.js":"2YnJv","core-js/modules/es.set.js":"45A1i","core-js/modules/es.string.code-point-at.js":"KjisB","core-js/modules/es.string.ends-with.js":"3VlaV","core-js/modules/es.string.from-code-point.js":"2eZAG","core-js/modules/es.string.includes.js":"lkI9x","core-js/modules/es.string.iterator.js":"5WvFl","core-js/modules/es.string.match.js":"6pHLn","core-js/modules/es.string.pad-end.js":"7MbUJ","core-js/modules/es.string.pad-start.js":"6wqhe","core-js/modules/es.string.raw.js":"1CdU8","core-js/modules/es.string.repeat.js":"4WXVZ","core-js/modules/es.string.replace.js":"2iTl6","core-js/modules/es.string.search.js":"6nyMW","core-js/modules/es.string.split.js":"64exK","core-js/modules/es.string.starts-with.js":"6h2Lf","core-js/modules/es.string.trim.js":"2V1KE","core-js/modules/es.string.trim-end.js":"5GKFZ","core-js/modules/es.string.trim-start.js":"2gZGA","core-js/modules/es.string.anchor.js":"3hKur","core-js/modules/es.string.big.js":"2ccGO","core-js/modules/es.string.blink.js":"4bG66","core-js/modules/es.string.bold.js":"7elf3","core-js/modules/es.string.fixed.js":"6MThk","core-js/modules/es.string.fontcolor.js":"h1fJb","core-js/modules/es.string.fontsize.js":"2V4CV","core-js/modules/es.string.italics.js":"4pkfR","core-js/modules/es.string.link.js":"6O5K7","core-js/modules/es.string.small.js":"72xif","core-js/modules/es.string.strike.js":"stJIc","core-js/modules/es.string.sub.js":"73CXV","core-js/modules/es.string.sup.js":"6FXoa","core-js/modules/es.typed-array.float32-array.js":"2rpR3","core-js/modules/es.typed-array.float64-array.js":"5DAAO","core-js/modules/es.typed-array.int8-array.js":"3oGj0","core-js/modules/es.typed-array.int16-array.js":"1UdDp","core-js/modules/es.typed-array.int32-array.js":"29qk8","core-js/modules/es.typed-array.uint8-array.js":"3D99S","core-js/modules/es.typed-array.uint8-clamped-array.js":"4q9wR","core-js/modules/es.typed-array.uint16-array.js":"5zmqI","core-js/modules/es.typed-array.uint32-array.js":"11vWZ","core-js/modules/es.typed-array.copy-within.js":"1WlqG","core-js/modules/es.typed-array.every.js":"381MD","core-js/modules/es.typed-array.fill.js":"6eTDh","core-js/modules/es.typed-array.filter.js":"57OgQ","core-js/modules/es.typed-array.find.js":"mPCiV","core-js/modules/es.typed-array.find-index.js":"5bzHg","core-js/modules/es.typed-array.for-each.js":"1AGxq","core-js/modules/es.typed-array.from.js":"6uezR","core-js/modules/es.typed-array.includes.js":"3MW82","core-js/modules/es.typed-array.index-of.js":"1bmpY","core-js/modules/es.typed-array.iterator.js":"2uTtj","core-js/modules/es.typed-array.join.js":"6daJ5","core-js/modules/es.typed-array.last-index-of.js":"viVbQ","core-js/modules/es.typed-array.map.js":"78tZp","core-js/modules/es.typed-array.of.js":"1jvfQ","core-js/modules/es.typed-array.reduce.js":"s1upg","core-js/modules/es.typed-array.reduce-right.js":"6YNtT","core-js/modules/es.typed-array.reverse.js":"2w4fW","core-js/modules/es.typed-array.set.js":"26oyN","core-js/modules/es.typed-array.slice.js":"4wp7C","core-js/modules/es.typed-array.some.js":"1SDUb","core-js/modules/es.typed-array.sort.js":"5DtH6","core-js/modules/es.typed-array.subarray.js":"1ZRhL","core-js/modules/es.typed-array.to-locale-string.js":"1kMnd","core-js/modules/es.typed-array.to-string.js":"6bzC4","core-js/modules/es.weak-map.js":"XcaBC","core-js/modules/es.weak-set.js":"1xRLP","core-js/modules/web.dom-collections.for-each.js":"4R0aZ","core-js/modules/web.dom-collections.iterator.js":"3GR48","core-js/modules/web.immediate.js":"3NSxt","core-js/modules/web.queue-microtask.js":"3nwlD","core-js/modules/web.timers.js":"GLPyh","core-js/modules/web.url.js":"1CNX6","core-js/modules/web.url.to-json.js":"1bch0","core-js/modules/web.url-search-params.js":"4tznt","regenerator-runtime/runtime":"62Qib","url:../img/icons.svg":"3t5dV","./model.js":"1hp6y","./views/recipeView.js":"9e6b9","./views/searchView.js":"3rYQ6","./views/resultsView.js":"17PYN"}],"7vj2t":[function(require,module,exports) {
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
@@ -12249,76 +12252,83 @@ var _babelRuntimeHelpersClassCallCheck = require("@babel/runtime/helpers/classCa
 var _babelRuntimeHelpersClassCallCheckDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersClassCallCheck);
 var _babelRuntimeHelpersCreateClass = require("@babel/runtime/helpers/createClass");
 var _babelRuntimeHelpersCreateClassDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersCreateClass);
+var _babelRuntimeHelpersAssertThisInitialized = require("@babel/runtime/helpers/assertThisInitialized");
+var _babelRuntimeHelpersAssertThisInitializedDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersAssertThisInitialized);
+var _babelRuntimeHelpersInherits = require("@babel/runtime/helpers/inherits");
+var _babelRuntimeHelpersInheritsDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersInherits);
+var _babelRuntimeHelpersPossibleConstructorReturn = require("@babel/runtime/helpers/possibleConstructorReturn");
+var _babelRuntimeHelpersPossibleConstructorReturnDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersPossibleConstructorReturn);
+var _babelRuntimeHelpersGetPrototypeOf = require("@babel/runtime/helpers/getPrototypeOf");
+var _babelRuntimeHelpersGetPrototypeOfDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersGetPrototypeOf);
 var _babelRuntimeHelpersDefineProperty = require("@babel/runtime/helpers/defineProperty");
 var _babelRuntimeHelpersDefinePropertyDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersDefineProperty);
+var _ViewJs = require('./View.js');
+var _ViewJsDefault = _parcelHelpers.interopDefault(_ViewJs);
 var _urlImgIconsSvg = require('url:../../img/icons.svg');
 var _urlImgIconsSvgDefault = _parcelHelpers.interopDefault(_urlImgIconsSvg);
-var RecipeView = /*#__PURE__*/(function () {
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+  return function _createSuperInternal() {
+    var Super = _babelRuntimeHelpersGetPrototypeOfDefault.default(Derived), result;
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _babelRuntimeHelpersGetPrototypeOfDefault.default(this).constructor;
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+    return _babelRuntimeHelpersPossibleConstructorReturnDefault.default(this, result);
+  };
+}
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+var RecipeView = /*#__PURE__*/(function (_View) {
+  _babelRuntimeHelpersInheritsDefault.default(RecipeView, _View);
+  var _super = _createSuper(RecipeView);
   function RecipeView() {
+    var _this;
     _babelRuntimeHelpersClassCallCheckDefault.default(this, RecipeView);
-    _babelRuntimeHelpersDefinePropertyDefault.default(this, "_parentElement", document.querySelector('.recipe'));
-    _babelRuntimeHelpersDefinePropertyDefault.default(this, "_data", void 0);
-    _babelRuntimeHelpersDefinePropertyDefault.default(this, "_errorMessage", "We couldn't recipe you're looking. Please try another one.");
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+    _this = _super.call.apply(_super, [this].concat(args));
+    _babelRuntimeHelpersDefinePropertyDefault.default(_babelRuntimeHelpersAssertThisInitializedDefault.default(_this), "_parentElement", document.querySelector('.recipe'));
+    _babelRuntimeHelpersDefinePropertyDefault.default(_babelRuntimeHelpersAssertThisInitializedDefault.default(_this), "_errorMessage", "We couldn't recipe you're looking. Please try another one.");
+    _babelRuntimeHelpersDefinePropertyDefault.default(_babelRuntimeHelpersAssertThisInitializedDefault.default(_this), "_message", "");
+    return _this;
   }
   _babelRuntimeHelpersCreateClassDefault.default(RecipeView, [{
-    key: "render",
-    value: function render(data) {
-      this._data = data;
-      var markup = this._generateMarkup();
-      // # Delete content before inject new content
-      this._clear();
-      // # Inject new content
-      this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    key: "_generateMarkup",
+    value: function _generateMarkup() {
+      return ("\n        <figure class=\"recipe__fig\">\n                <img src=\"").concat(this._data.image, "\" alt=\"").concat(this._data.title, "\" class=\"recipe__img\" />\n                <h1 class=\"recipe__title\">\n                  <span>").concat(this._data.title, "</span>\n                </h1>\n              </figure>\n      \n              <div class=\"recipe__details\">\n                <div class=\"recipe__info\">\n                  <svg class=\"recipe__info-icon\">\n                    <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-clock\"></use>\n                  </svg>\n                  <span class=\"recipe__info-data recipe__info-data--minutes\">").concat(this._data.cookingTime, "</span>\n                  <span class=\"recipe__info-text\">minutes</span>\n                </div>\n                <div class=\"recipe__info\">\n                  <svg class=\"recipe__info-icon\">\n                    <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-users\"></use>\n                  </svg>\n                  <span class=\"recipe__info-data recipe__info-data--people\">").concat(this._data.servings, "</span>\n                  <span class=\"recipe__info-text\">servings</span>\n      \n                  <div class=\"recipe__info-buttons\">\n                    <button class=\"btn--tiny btn--increase-servings\">\n                      <svg>\n                        <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-minus-circle\"></use>\n                      </svg>\n                    </button>\n                    <button class=\"btn--tiny btn--increase-servings\">\n                      <svg>\n                        <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-plus-circle\"></use>\n                      </svg>\n                    </button>\n                  </div>\n                </div>\n      \n                <div class=\"recipe__user-generated\">\n                  <svg>\n                    <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-user\"></use>\n                  </svg>\n                </div>\n                <button class=\"btn--round\">\n                  <svg class=\"\">\n                    <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-bookmark-fill\"></use>\n                  </svg>\n                </button>\n              </div>\n      \n              <div class=\"recipe__ingredients\">\n                <h2 class=\"heading--2\">Recipe ingredients</h2>\n                <ul class=\"recipe__ingredient-list\">\n                ").concat(this._data.ingredients.map(this._generateMarkupIngredient).join(''), "\n                </ul>\n              </div>\n      \n              <div class=\"recipe__directions\">\n                <h2 class=\"heading--2\">How to cook it</h2>\n                <p class=\"recipe__directions-text\">\n                  This recipe was carefully designed and tested by\n                  <span class=\"recipe__publisher\">").concat(this._data.publisher, "</span>. Please check out\n                  directions at their website.\n                </p>\n                <a\n                  class=\"btn--small recipe__btn\"\n                  href=\"").concat(this._data.sourceUrl, "\"\n                  target=\"_blank\"\n                >\n                  <span>Directions</span>\n                  <svg class=\"search__icon\">\n                    <use href=\"src/img/icons.svg#icon-arrow-right\"></use>\n                  </svg>\n                </a>\n              </div>\n        ");
     }
   }, {
-    key: "addHandleRender",
+    key: "_generateMarkupIngredient",
+    value: function _generateMarkupIngredient(ing) {
+      return ("\n    <li class=\"recipe__ingredient\">\n      <svg class=\"recipe__icon\">\n        <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-check\"></use>\n      </svg>\n      <div class=\"recipe__quantity\">").concat(ing.quantity, "</div>\n      <div class=\"recipe__description\">\n        <span class=\"recipe__unit\">").concat(ing.unit, "</span>\n        ").concat(ing.description, "\n      </div>\n    </li>\n    ");
+    }
+  }, {
+    key: "addHandlerRender",
     value: // Publishers
-    function addHandleRender(handler) {
+    function addHandlerRender(handler) {
       ['hashchange', 'load'].forEach(function (event) {
         return window.addEventListener(event, handler);
       });
     }
-  }, {
-    key: "renderSpinner",
-    value: function renderSpinner() {
-      var markup = ("\n    <div class=\"spinner\">\n        <svg>\n        <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-loader\"></use>\n        </svg>\n    </div>\n    ");
-      this._clear();
-      this._parentElement.insertAdjacentHTML('afterbegin', markup);
-    }
-  }, {
-    key: "renderError",
-    value: function renderError() {
-      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._errorMessage;
-      var markup = ("\n    <div class=\"error\">\n    <div>\n      <svg>\n        <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-alert-triangle\"></use>\n      </svg>\n    </div>\n    <p>").concat(message, "</p>\n  </div>\n  ");
-      this._clear();
-      this._parentElement.insertAdjacentHTML('afterbegin', markup);
-    }
-  }, {
-    key: "renderMessage",
-    value: function renderMessage() {
-      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._message;
-      var markup = ("\n    <div class=\"message\">\n    <div>\n      <svg>\n        <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-smile\"></use>\n      </svg>\n    </div>\n    <p>").concat(message, "</p>\n  </div>\n    ");
-      this._clear();
-      this._parentElement.insertAdjacentHTML('afterbegin', markup);
-    }
-  }, {
-    key: "_clear",
-    value: function _clear() {
-      this._parentElement.innerHTML = '';
-    }
-  }, {
-    key: "_generateMarkup",
-    value: function _generateMarkup() {
-      return ("\n        <figure class=\"recipe__fig\">\n                <img src=\"").concat(this._data.image, "\" alt=\"").concat(this._data.title, "\" class=\"recipe__img\" />\n                <h1 class=\"recipe__title\">\n                  <span>").concat(this._data.title, "</span>\n                </h1>\n              </figure>\n      \n              <div class=\"recipe__details\">\n                <div class=\"recipe__info\">\n                  <svg class=\"recipe__info-icon\">\n                    <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-clock\"></use>\n                  </svg>\n                  <span class=\"recipe__info-data recipe__info-data--minutes\">").concat(this._data.cookingTime, "</span>\n                  <span class=\"recipe__info-text\">minutes</span>\n                </div>\n                <div class=\"recipe__info\">\n                  <svg class=\"recipe__info-icon\">\n                    <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-users\"></use>\n                  </svg>\n                  <span class=\"recipe__info-data recipe__info-data--people\">").concat(this._data.servings, "</span>\n                  <span class=\"recipe__info-text\">servings</span>\n      \n                  <div class=\"recipe__info-buttons\">\n                    <button class=\"btn--tiny btn--increase-servings\">\n                      <svg>\n                        <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-minus-circle\"></use>\n                      </svg>\n                    </button>\n                    <button class=\"btn--tiny btn--increase-servings\">\n                      <svg>\n                        <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-plus-circle\"></use>\n                      </svg>\n                    </button>\n                  </div>\n                </div>\n      \n                <div class=\"recipe__user-generated\">\n                  <svg>\n                    <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-user\"></use>\n                  </svg>\n                </div>\n                <button class=\"btn--round\">\n                  <svg class=\"\">\n                    <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-bookmark-fill\"></use>\n                  </svg>\n                </button>\n              </div>\n      \n              <div class=\"recipe__ingredients\">\n                <h2 class=\"heading--2\">Recipe ingredients</h2>\n                <ul class=\"recipe__ingredient-list\">\n                ").concat(this._data.ingredients.map(function (ing) {
-        return ("\n                  <li class=\"recipe__ingredient\">\n                    <svg class=\"recipe__icon\">\n                      <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-check\"></use>\n                    </svg>\n                    <div class=\"recipe__quantity\">").concat(ing.quantity, "</div>\n                    <div class=\"recipe__description\">\n                      <span class=\"recipe__unit\">").concat(ing.unit, "</span>\n                      ").concat(ing.description, "\n                    </div>\n                  </li>\n                  ");
-      }).join(''), "\n                </ul>\n              </div>\n      \n              <div class=\"recipe__directions\">\n                <h2 class=\"heading--2\">How to cook it</h2>\n                <p class=\"recipe__directions-text\">\n                  This recipe was carefully designed and tested by\n                  <span class=\"recipe__publisher\">").concat(this._data.publisher, "</span>. Please check out\n                  directions at their website.\n                </p>\n                <a\n                  class=\"btn--small recipe__btn\"\n                  href=\"").concat(this._data.sourceUrl, "\"\n                  target=\"_blank\"\n                >\n                  <span>Directions</span>\n                  <svg class=\"search__icon\">\n                    <use href=\"src/img/icons.svg#icon-arrow-right\"></use>\n                  </svg>\n                </a>\n              </div>\n        ");
-    }
   }]);
   return RecipeView;
-})();
+})(_ViewJsDefault.default);
 exports.default = new RecipeView();
 
-},{"@babel/runtime/helpers/classCallCheck":"2bdFw","@babel/runtime/helpers/createClass":"2EITm","@babel/runtime/helpers/defineProperty":"5PI63","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","url:../../img/icons.svg":"3t5dV"}],"2bdFw":[function(require,module,exports) {
+},{"@babel/runtime/helpers/classCallCheck":"2bdFw","@babel/runtime/helpers/createClass":"2EITm","@babel/runtime/helpers/defineProperty":"5PI63","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","url:../../img/icons.svg":"3t5dV","@babel/runtime/helpers/assertThisInitialized":"1BXAs","@babel/runtime/helpers/inherits":"dNu3I","@babel/runtime/helpers/possibleConstructorReturn":"3vcut","@babel/runtime/helpers/getPrototypeOf":"7d4Cy","./View.js":"48jhP"}],"2bdFw":[function(require,module,exports) {
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -12364,7 +12374,161 @@ function _defineProperty(obj, key, value) {
 
 module.exports = _defineProperty;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
-},{}],"3rYQ6":[function(require,module,exports) {
+},{}],"1BXAs":[function(require,module,exports) {
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+module.exports = _assertThisInitialized;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{}],"dNu3I":[function(require,module,exports) {
+var setPrototypeOf = require("./setPrototypeOf.js");
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) setPrototypeOf(subClass, superClass);
+}
+
+module.exports = _inherits;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{"./setPrototypeOf.js":"37Yld"}],"37Yld":[function(require,module,exports) {
+function _setPrototypeOf(o, p) {
+  module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+  return _setPrototypeOf(o, p);
+}
+
+module.exports = _setPrototypeOf;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{}],"3vcut":[function(require,module,exports) {
+var _typeof = require("@babel/runtime/helpers/typeof")["default"];
+
+var assertThisInitialized = require("./assertThisInitialized.js");
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return assertThisInitialized(self);
+}
+
+module.exports = _possibleConstructorReturn;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{"@babel/runtime/helpers/typeof":"3F8fn","./assertThisInitialized.js":"1BXAs"}],"3F8fn":[function(require,module,exports) {
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{}],"7d4Cy":[function(require,module,exports) {
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{}],"48jhP":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "default", function () {
+  return View;
+});
+var _babelRuntimeHelpersClassCallCheck = require("@babel/runtime/helpers/classCallCheck");
+var _babelRuntimeHelpersClassCallCheckDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersClassCallCheck);
+var _babelRuntimeHelpersCreateClass = require("@babel/runtime/helpers/createClass");
+var _babelRuntimeHelpersCreateClassDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersCreateClass);
+var _babelRuntimeHelpersDefineProperty = require("@babel/runtime/helpers/defineProperty");
+var _babelRuntimeHelpersDefinePropertyDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersDefineProperty);
+var _urlImgIconsSvg = require('url:../../img/icons.svg');
+var _urlImgIconsSvgDefault = _parcelHelpers.interopDefault(_urlImgIconsSvg);
+var View = /*#__PURE__*/(function () {
+  function View() {
+    _babelRuntimeHelpersClassCallCheckDefault.default(this, View);
+    _babelRuntimeHelpersDefinePropertyDefault.default(this, "_data", void 0);
+    _babelRuntimeHelpersDefinePropertyDefault.default(this, "renderSpinner", function () {
+      var markup = ("\n    <div class=\"spinner\">\n      <svg>\n        <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-loader\"></use>\n      </svg>\n    </div>\n    ");
+      this._clear();
+      this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    });
+  }
+  _babelRuntimeHelpersCreateClassDefault.default(View, [{
+    key: "render",
+    value: function render(data) {
+      if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
+      this._data = data;
+      var markup = this._generateMarkup();
+      // ## Delete content before inject new content
+      // recipeContainer.innerHTML = '';
+      this._clear();
+      // ## Inject new content
+      this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+  }, {
+    key: "renderError",
+    value: function renderError() {
+      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._errorMessage;
+      var markup = ("\n    <div class=\"error\">\n      <div>\n        <svg>\n          <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-alert-triangle\"></use>\n        </svg>\n      </div>\n      <p>").concat(message, "</p>\n    </div>\n    ");
+      this._clear();
+      this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+  }, {
+    key: "renderMessage",
+    value: function renderMessage() {
+      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this._message;
+      var markup = ("\n    <div class=\"message\">\n      <div>\n        <svg>\n          <use href=\"").concat(_urlImgIconsSvgDefault.default, "#icon-smile\"></use>\n        </svg>\n      </div>\n      <p>").concat(message, "</p>\n    </div>\n    ");
+      this._clear();
+      this._parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+  }, {
+    key: "_clear",
+    value: function _clear() {
+      this._parentElement.innerHTML = '';
+    }
+  }]);
+  return View;
+})();
+
+},{"@babel/runtime/helpers/classCallCheck":"2bdFw","@babel/runtime/helpers/createClass":"2EITm","@babel/runtime/helpers/defineProperty":"5PI63","url:../../img/icons.svg":"3t5dV","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"3rYQ6":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 var _babelRuntimeHelpersClassCallCheck = require("@babel/runtime/helpers/classCallCheck");
@@ -12403,6 +12567,80 @@ var SearchView = /*#__PURE__*/(function () {
 })();
 exports.default = new SearchView();
 
-},{"@babel/runtime/helpers/classCallCheck":"2bdFw","@babel/runtime/helpers/createClass":"2EITm","@babel/runtime/helpers/defineProperty":"5PI63","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}]},["7BONy","3miIZ"], "3miIZ", "parcelRequiref207")
+},{"@babel/runtime/helpers/classCallCheck":"2bdFw","@babel/runtime/helpers/createClass":"2EITm","@babel/runtime/helpers/defineProperty":"5PI63","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"17PYN":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _babelRuntimeHelpersClassCallCheck = require("@babel/runtime/helpers/classCallCheck");
+var _babelRuntimeHelpersClassCallCheckDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersClassCallCheck);
+var _babelRuntimeHelpersCreateClass = require("@babel/runtime/helpers/createClass");
+var _babelRuntimeHelpersCreateClassDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersCreateClass);
+var _babelRuntimeHelpersAssertThisInitialized = require("@babel/runtime/helpers/assertThisInitialized");
+var _babelRuntimeHelpersAssertThisInitializedDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersAssertThisInitialized);
+var _babelRuntimeHelpersInherits = require("@babel/runtime/helpers/inherits");
+var _babelRuntimeHelpersInheritsDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersInherits);
+var _babelRuntimeHelpersPossibleConstructorReturn = require("@babel/runtime/helpers/possibleConstructorReturn");
+var _babelRuntimeHelpersPossibleConstructorReturnDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersPossibleConstructorReturn);
+var _babelRuntimeHelpersGetPrototypeOf = require("@babel/runtime/helpers/getPrototypeOf");
+var _babelRuntimeHelpersGetPrototypeOfDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersGetPrototypeOf);
+var _babelRuntimeHelpersDefineProperty = require("@babel/runtime/helpers/defineProperty");
+var _babelRuntimeHelpersDefinePropertyDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersDefineProperty);
+var _ViewJs = require('./View.js');
+var _ViewJsDefault = _parcelHelpers.interopDefault(_ViewJs);
+require('url:../../img/icons.svg');
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+  return function _createSuperInternal() {
+    var Super = _babelRuntimeHelpersGetPrototypeOfDefault.default(Derived), result;
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _babelRuntimeHelpersGetPrototypeOfDefault.default(this).constructor;
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+    return _babelRuntimeHelpersPossibleConstructorReturnDefault.default(this, result);
+  };
+}
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+var ResultsView = /*#__PURE__*/(function (_View) {
+  _babelRuntimeHelpersInheritsDefault.default(ResultsView, _View);
+  var _super = _createSuper(ResultsView);
+  function ResultsView() {
+    var _this;
+    _babelRuntimeHelpersClassCallCheckDefault.default(this, ResultsView);
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+    _this = _super.call.apply(_super, [this].concat(args));
+    _babelRuntimeHelpersDefinePropertyDefault.default(_babelRuntimeHelpersAssertThisInitializedDefault.default(_this), "_parentElement", document.querySelector('.results'));
+    _babelRuntimeHelpersDefinePropertyDefault.default(_babelRuntimeHelpersAssertThisInitializedDefault.default(_this), "_errorMessage", "No recipes found for your query!");
+    _babelRuntimeHelpersDefinePropertyDefault.default(_babelRuntimeHelpersAssertThisInitializedDefault.default(_this), "_message", "");
+    return _this;
+  }
+  _babelRuntimeHelpersCreateClassDefault.default(ResultsView, [{
+    key: "_generateMarkup",
+    value: function _generateMarkup() {
+      return this._data.map(this._generateMarkupPreview).join('');
+    }
+  }, {
+    key: "_generateMarkupPreview",
+    value: function _generateMarkupPreview(result) {
+      return ("\n        <li class=\"preview\">\n        <a class=\"preview__link\" href=\"#").concat(result.id, "\">\n          <figure class=\"preview__fig\">\n            <img src=\"").concat(result.image, "\" alt=\"").concat(result.title, "\" />\n          </figure>\n          <div class=\"preview__data\">\n            <h4 class=\"preview__title\">").concat(result.title, "</h4>\n            <p class=\"preview__publisher\">").concat(result.publisher, "</p>\n          </div>\n        </a>\n      </li>\n        ");
+    }
+  }]);
+  return ResultsView;
+})(_ViewJsDefault.default);
+exports.default = new ResultsView();
+
+},{"@babel/runtime/helpers/classCallCheck":"2bdFw","@babel/runtime/helpers/createClass":"2EITm","@babel/runtime/helpers/assertThisInitialized":"1BXAs","@babel/runtime/helpers/inherits":"dNu3I","@babel/runtime/helpers/possibleConstructorReturn":"3vcut","@babel/runtime/helpers/getPrototypeOf":"7d4Cy","@babel/runtime/helpers/defineProperty":"5PI63","./View.js":"48jhP","url:../../img/icons.svg":"3t5dV","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}]},["7BONy","3miIZ"], "3miIZ", "parcelRequiref207")
 
 //# sourceMappingURL=index.250b04c7.js.map
