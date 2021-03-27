@@ -6,6 +6,7 @@ import icons from 'url:../img/icons.svg';
 import * as model from './model.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
+import resultsView from './views/resultsView.js';
 
 const controlRecipes = async function () {
   try {
@@ -39,6 +40,7 @@ const controlSearchResults = async function () {
 
     // 3) Render results
     console.log(model.state.search.results);
+    resultsView.render(model.state.search.results);
   } catch (error) {
     console.log(error);
   }
