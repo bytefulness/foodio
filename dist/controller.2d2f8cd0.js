@@ -455,6 +455,8 @@ var _searchView = _interopRequireDefault(require("./views/searchView.js"));
 
 var _resultsView = _interopRequireDefault(require("./views/resultsView.js"));
 
+var _paginationView = _interopRequireDefault(require("./views/paginationView.js"));
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -489,12 +491,21 @@ const controlSearchResults = async function () {
 
     await model.loadSearchResults(query); // 3) Render results
 
-    console.log(model.state.search.results);
+    _resultsView.default.render(model.getSearchResults()); // Render initial pagination results
 
-    _resultsView.default.render(model.state.search.results);
+
+    _paginationView.default.render(model.state.search);
   } catch (error) {
     console.log(error);
   }
+};
+
+const controlPagination = function (goToPage) {
+  // Render new results
+  _resultsView.default.render(model.getSearchResults(goToPage)); // Render new pagination buttons
+
+
+  _paginationView.default.render(model.state.search);
 };
 
 const init = function () {
@@ -502,10 +513,12 @@ const init = function () {
   _recipeView.default.addHandlerRender(controlRecipes);
 
   _searchView.default.addHandlerSearch(controlSearchResults);
+
+  _paginationView.default.addHandlerClick(controlPagination);
 };
 
 init();
-},{"core-js/modules/web.immediate.js":"140df4f8e97a45c53c66fead1f5a9e92","core-js/modules/web.url.js":"a66c25e402880ea6b966ee8ece30b6df","core-js/modules/web.url.to-json.js":"6357c5a053a36e38c0e24243e550dd86","core-js/modules/web.url-search-params.js":"2494aebefd4ca447de0ef4cfdd47509e","url:../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230","./model.js":"aabf248f40f7693ef84a0cb99f385d1f","./views/recipeView.js":"bcae1aced0301b01ccacb3e6f7dfede8","./views/searchView.js":"c5d792f7cac03ef65de30cc0fbb2cae7","./views/resultsView.js":"eacdbc0d50ee3d2819f3ee59366c2773"}],"140df4f8e97a45c53c66fead1f5a9e92":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"140df4f8e97a45c53c66fead1f5a9e92","core-js/modules/web.url.js":"a66c25e402880ea6b966ee8ece30b6df","core-js/modules/web.url.to-json.js":"6357c5a053a36e38c0e24243e550dd86","core-js/modules/web.url-search-params.js":"2494aebefd4ca447de0ef4cfdd47509e","url:../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230","./model.js":"aabf248f40f7693ef84a0cb99f385d1f","./views/recipeView.js":"bcae1aced0301b01ccacb3e6f7dfede8","./views/searchView.js":"c5d792f7cac03ef65de30cc0fbb2cae7","./views/resultsView.js":"eacdbc0d50ee3d2819f3ee59366c2773","./views/paginationView.js":"d2063f3e7de2e4cdacfcb5eb6479db05"}],"140df4f8e97a45c53c66fead1f5a9e92":[function(require,module,exports) {
 var $ = require('../internals/export');
 
 var global = require('../internals/global');
@@ -3946,7 +3959,7 @@ module.exports._relative = relative;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.loadSearchResults = exports.loadRecipe = exports.state = void 0;
+exports.getSearchResults = exports.loadSearchResults = exports.loadRecipe = exports.state = void 0;
 
 var _config = require("./config.js");
 
@@ -3956,7 +3969,9 @@ const state = {
   recipe: {},
   search: {
     query: '',
-    results: []
+    results: [],
+    page: 1,
+    resultsPerPage: _config.RES_PER_PAGE
   }
 };
 exports.state = state;
@@ -4007,17 +4022,28 @@ const loadSearchResults = async function (query) {
 };
 
 exports.loadSearchResults = loadSearchResults;
+
+const getSearchResults = function (page = 1) {
+  state.search.page = page;
+  const start = (page - 1) * state.search.resultsPerpage;
+  const end = page * state.search.resultsPerPage;
+  return state.search.results.slice(start, end);
+};
+
+exports.getSearchResults = getSearchResults;
 },{"./config.js":"09212d541c5c40ff2bd93475a904f8de","./helper.js":"ca5e72bede557533b2de19db21a2a688"}],"09212d541c5c40ff2bd93475a904f8de":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TIMEOUT_SEC = exports.API_URL = void 0;
+exports.RES_PER_PAGE = exports.TIMEOUT_SEC = exports.API_URL = void 0;
 const API_URL = 'https://forkify-api.herokuapp.com/api/v2/recipes/';
 exports.API_URL = API_URL;
 const TIMEOUT_SEC = 10;
 exports.TIMEOUT_SEC = TIMEOUT_SEC;
+const RES_PER_PAGE = 10;
+exports.RES_PER_PAGE = RES_PER_PAGE;
 },{}],"ca5e72bede557533b2de19db21a2a688":[function(require,module,exports) {
 "use strict";
 
@@ -4372,6 +4398,93 @@ class ResultsView extends _View.default {
 var _default = new ResultsView();
 
 exports.default = _default;
-},{"@babel/runtime/helpers/defineProperty":"0fe1617ef4d3c268577beb1e6641d4a5","./View.js":"61b7a1b097e16436be3d54c2f1828c73","url:../../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230"}]},{},["ac692aff9cffcf8d7e19ba737409a489","4a455d0a6cffeb5e80f83877a8fea1aa","175e469a7ea7db1c8c0744d04372621f"], null)
+},{"@babel/runtime/helpers/defineProperty":"0fe1617ef4d3c268577beb1e6641d4a5","./View.js":"61b7a1b097e16436be3d54c2f1828c73","url:../../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230"}],"d2063f3e7de2e4cdacfcb5eb6479db05":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
+var _View = _interopRequireDefault(require("./View"));
+
+var _icons = _interopRequireDefault(require("url:../../img/icons.svg"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class PaginationView extends _View.default {
+  constructor(...args) {
+    super(...args);
+    (0, _defineProperty2.default)(this, "_parentElement", document.querySelector('.pagination'));
+  }
+
+  addHandlerClick(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--inline'); // Guard clouse
+
+      if (!btn) return;
+      const goToPage = +btn.dataset.goto;
+      handler(goToPage);
+    });
+  }
+
+  _generateMarkup() {
+    const curPage = this._data.page;
+    const numPages = Math.ceil(this._data.results.length / this._data.resultsPerPage); // Page 1, and there are other pages
+
+    if (curPage === 1 && numPages > 1) {
+      return `
+          <button data-goto="${curPage + 1}" class="btn--inline pagination__btn--next">
+          <span>Page ${curPage + 1}</span>
+          <svg class="search__icon">
+            <use href="${_icons.default}#icon-arrow-right"></use>
+          </svg>
+          </button>
+            `;
+    } //   Last page
+
+
+    if (curPage === numPages && numPages > 1) {
+      return `
+          <button data-goto="${curPage - 1}" class="btn--inline pagination__btn--prev">
+           <svg class="search__icon">
+           <use href="${_icons.default}#icon-arrow-left"></use>
+           </svg>
+           <span>Page ${curPage - 1}</span>
+          </button>
+          `;
+    } //   Other page
+
+
+    if (curPage < numPages) {
+      return `
+          <button data-goto="${curPage - 1}" class="btn--inline pagination__btn--prev">
+          <svg class="search__icon">
+          <use href="${_icons.default}#icon-arrow-left"></use>
+          </svg>
+          <span>Page ${curPage - 1}</span>
+         </button>
+  
+         <button data-goto="${curPage + 1}" class="btn--inline pagination__btn--next">
+          <span>Page ${curPage + 1}</span>
+          <svg class="search__icon">
+            <use href="${_icons.default}#icon-arrow-right"></use>
+          </svg>
+          </button>
+          `;
+    } // Page 1, and there are NO other pages
+
+
+    return '';
+  }
+
+}
+
+var _default = new PaginationView();
+
+exports.default = _default;
+},{"@babel/runtime/helpers/defineProperty":"0fe1617ef4d3c268577beb1e6641d4a5","./View":"61b7a1b097e16436be3d54c2f1828c73","url:../../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230"}]},{},["ac692aff9cffcf8d7e19ba737409a489","4a455d0a6cffeb5e80f83877a8fea1aa","175e469a7ea7db1c8c0744d04372621f"], null)
 
 //# sourceMappingURL=controller.2d2f8cd0.js.map
