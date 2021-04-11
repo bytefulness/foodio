@@ -4,8 +4,7 @@
   "description": "Search delicious recipes to create tasty food",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel index.html",
+    "start": "parcel serve index.html",
     "build": "parcel build index.html"
   },
   "repository": {
@@ -26,7 +25,7 @@
     "@parcel/babel-plugin-transform-runtime": "^2.0.0-nightly.1823",
     "@parcel/babel-preset-env": "^2.0.0-beta.2",
     "@parcel/transformer-sass": "^2.0.0-beta.2",
-    "parcel": "^2.0.0-beta.2"
+    "parcel": "^2.0.0-beta.1"
   },
   "dependencies": {
     "core-js": "^3.9.1",
