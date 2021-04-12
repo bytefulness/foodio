@@ -4036,7 +4036,7 @@ exports.loadSearchResults = loadSearchResults;
 
 const getSearchResults = function (page = 1) {
   state.search.page = page;
-  const start = (page - 1) * state.search.resultsPerpage;
+  const start = (page - 1) * state.search.resultsPerPage;
   const end = page * state.search.resultsPerPage;
   return state.search.results.slice(start, end);
 };
