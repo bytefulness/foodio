@@ -459,6 +459,8 @@ var _paginationView = _interopRequireDefault(require("./views/paginationView.js"
 
 var _bookmarksView = _interopRequireDefault(require("./views/bookmarksView.js"));
 
+var _addRecipeView = _interopRequireDefault(require("./views/addRecipeView.js"));
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -540,6 +542,14 @@ const controlBookmarks = function () {
   _bookmarksView.default.render(model.state.bookmarks);
 };
 
+const controlAddRecipe = async function (newRecipe) {
+  try {
+    await model.uploadRecipe(newRecipe);
+  } catch (error) {
+    _addRecipeView.default.renderError(error.message);
+  }
+};
+
 const init = function () {
   // Subscribers
   _bookmarksView.default.addHandlerRender(controlBookmarks);
@@ -553,10 +563,12 @@ const init = function () {
   _searchView.default.addHandlerSearch(controlSearchResults);
 
   _paginationView.default.addHandlerClick(controlPagination);
+
+  _addRecipeView.default.addHandlerUpload(controlAddRecipe);
 };
 
 init();
-},{"core-js/modules/web.immediate.js":"140df4f8e97a45c53c66fead1f5a9e92","core-js/modules/web.url.js":"a66c25e402880ea6b966ee8ece30b6df","core-js/modules/web.url.to-json.js":"6357c5a053a36e38c0e24243e550dd86","core-js/modules/web.url-search-params.js":"2494aebefd4ca447de0ef4cfdd47509e","url:../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230","./model.js":"aabf248f40f7693ef84a0cb99f385d1f","./views/recipeView.js":"bcae1aced0301b01ccacb3e6f7dfede8","./views/searchView.js":"c5d792f7cac03ef65de30cc0fbb2cae7","./views/resultsView.js":"eacdbc0d50ee3d2819f3ee59366c2773","./views/paginationView.js":"d2063f3e7de2e4cdacfcb5eb6479db05","./views/bookmarksView.js":"7ed9311e216aa789713f70ebeec3ed40"}],"140df4f8e97a45c53c66fead1f5a9e92":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"140df4f8e97a45c53c66fead1f5a9e92","core-js/modules/web.url.js":"a66c25e402880ea6b966ee8ece30b6df","core-js/modules/web.url.to-json.js":"6357c5a053a36e38c0e24243e550dd86","core-js/modules/web.url-search-params.js":"2494aebefd4ca447de0ef4cfdd47509e","url:../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230","./model.js":"aabf248f40f7693ef84a0cb99f385d1f","./views/recipeView.js":"bcae1aced0301b01ccacb3e6f7dfede8","./views/searchView.js":"c5d792f7cac03ef65de30cc0fbb2cae7","./views/resultsView.js":"eacdbc0d50ee3d2819f3ee59366c2773","./views/paginationView.js":"d2063f3e7de2e4cdacfcb5eb6479db05","./views/bookmarksView.js":"7ed9311e216aa789713f70ebeec3ed40","./views/addRecipeView.js":"4dd83c2a08c1751220d223c54dc70016"}],"140df4f8e97a45c53c66fead1f5a9e92":[function(require,module,exports) {
 var $ = require('../internals/export');
 
 var global = require('../internals/global');
@@ -3997,7 +4009,7 @@ module.exports._relative = relative;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteBookmark = exports.addBookmark = exports.updateServings = exports.getSearchResultsPage = exports.loadSearchResults = exports.loadRecipe = exports.state = void 0;
+exports.deleteBookmark = exports.addBookmark = exports.uploadRecipe = exports.updateServings = exports.getSearchResultsPage = exports.loadSearchResults = exports.loadRecipe = exports.state = void 0;
 
 var _config = require("./config.js");
 
@@ -4086,6 +4098,35 @@ const updateServings = function (newServings) {
 };
 
 exports.updateServings = updateServings;
+
+const uploadRecipe = async function (newRecipe) {
+  try {
+    console.log(newRecipe);
+    const ingredients = Object.entries(newRecipe).filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '').map(ing => {
+      const ingArr = ing[1].replaceAll(' ', '').split(',');
+      if (ingArr.length !== 3) throw new Error('Wrong ingredient format! Please use the correct one');
+      const [quantity, unit, description] = ingArr;
+      return {
+        quantity: quantity ? +quantity : null,
+        unit,
+        description
+      };
+    });
+    const recipe = {
+      title: newRecipe.title,
+      source_url: newRecipe.sourceUrl,
+      image_url: newRecipe.image,
+      publisher: newRecipe.publisher,
+      cooking_time: +newRecipe.cookingTime,
+      servings: +newRecipe.servings,
+      ingredients
+    };
+    console.log(ingredients);
+    console.log(recipe);
+  } catch (error) {}
+};
+
+exports.uploadRecipe = uploadRecipe;
 
 const persistBookmarks = function () {
   localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
@@ -5056,6 +5097,71 @@ class BookmarksView extends _View.default {
 var _default = new BookmarksView();
 
 exports.default = _default;
-},{"@babel/runtime/helpers/defineProperty":"0fe1617ef4d3c268577beb1e6641d4a5","./View.js":"61b7a1b097e16436be3d54c2f1828c73","./previewView.js":"e4d6583325a8b6c9380670c4f233bf07","url:../../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230"}]},{},["ac692aff9cffcf8d7e19ba737409a489","4a455d0a6cffeb5e80f83877a8fea1aa","175e469a7ea7db1c8c0744d04372621f"], null)
+},{"@babel/runtime/helpers/defineProperty":"0fe1617ef4d3c268577beb1e6641d4a5","./View.js":"61b7a1b097e16436be3d54c2f1828c73","./previewView.js":"e4d6583325a8b6c9380670c4f233bf07","url:../../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230"}],"4dd83c2a08c1751220d223c54dc70016":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
+var _View = _interopRequireDefault(require("./View.js"));
+
+var _icons = _interopRequireDefault(require("url:../../img/icons.svg"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// # Import Assets
+class AddRecipeView extends _View.default {
+  constructor() {
+    super();
+    (0, _defineProperty2.default)(this, "_parentElement", document.querySelector('.upload'));
+    (0, _defineProperty2.default)(this, "_window", document.querySelector('.add-recipe-window'));
+    (0, _defineProperty2.default)(this, "_overlay", document.querySelector('.overlay'));
+    (0, _defineProperty2.default)(this, "_btnOpen", document.querySelector('.nav__btn--add-recipe'));
+    (0, _defineProperty2.default)(this, "_btnClose", document.querySelector('.btn--close-modal'));
+
+    this._addHandlerShowWindow();
+
+    this._addHandlerHideWindow();
+  }
+
+  _toggleWindow() {
+    this._overlay.classList.toggle('hidden');
+
+    this._window.classList.toggle('hidden');
+  }
+
+  _addHandlerShowWindow() {
+    this._btnOpen.addEventListener('click', this._toggleWindow.bind(this));
+  }
+
+  _addHandlerHideWindow() {
+    this._btnClose.addEventListener('click', this._toggleWindow.bind(this));
+
+    this._overlay.addEventListener('click', this._toggleWindow.bind(this));
+  }
+
+  addHandlerUpload(handler) {
+    this._parentElement.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const dataArr = [...new FormData(this)];
+      console.log(dataArr);
+      const data = Object.fromEntries(dataArr);
+      console.log(data);
+      handler(data);
+    });
+  }
+
+  _generateMarkup() {}
+
+}
+
+var _default = new AddRecipeView();
+
+exports.default = _default;
+},{"@babel/runtime/helpers/defineProperty":"0fe1617ef4d3c268577beb1e6641d4a5","./View.js":"61b7a1b097e16436be3d54c2f1828c73","url:../../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230"}]},{},["ac692aff9cffcf8d7e19ba737409a489","4a455d0a6cffeb5e80f83877a8fea1aa","175e469a7ea7db1c8c0744d04372621f"], null)
 
 //# sourceMappingURL=controller.2d2f8cd0.js.map
