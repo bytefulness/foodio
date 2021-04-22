@@ -583,7 +583,7 @@ const init = function () {
 };
 
 init();
-},{"core-js/modules/web.immediate.js":"140df4f8e97a45c53c66fead1f5a9e92","core-js/modules/web.url.js":"a66c25e402880ea6b966ee8ece30b6df","core-js/modules/web.url.to-json.js":"6357c5a053a36e38c0e24243e550dd86","core-js/modules/web.url-search-params.js":"2494aebefd4ca447de0ef4cfdd47509e","url:../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230","./model.js":"aabf248f40f7693ef84a0cb99f385d1f","./views/recipeView.js":"bcae1aced0301b01ccacb3e6f7dfede8","./views/searchView.js":"c5d792f7cac03ef65de30cc0fbb2cae7","./views/resultsView.js":"eacdbc0d50ee3d2819f3ee59366c2773","./views/paginationView.js":"d2063f3e7de2e4cdacfcb5eb6479db05","./views/bookmarksView.js":"7ed9311e216aa789713f70ebeec3ed40","./views/addRecipeView.js":"4dd83c2a08c1751220d223c54dc70016","./config":"09212d541c5c40ff2bd93475a904f8de"}],"140df4f8e97a45c53c66fead1f5a9e92":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"140df4f8e97a45c53c66fead1f5a9e92","core-js/modules/web.url.js":"a66c25e402880ea6b966ee8ece30b6df","core-js/modules/web.url.to-json.js":"6357c5a053a36e38c0e24243e550dd86","core-js/modules/web.url-search-params.js":"2494aebefd4ca447de0ef4cfdd47509e","url:../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230","./model.js":"aabf248f40f7693ef84a0cb99f385d1f","./config":"09212d541c5c40ff2bd93475a904f8de","./views/recipeView.js":"bcae1aced0301b01ccacb3e6f7dfede8","./views/searchView.js":"c5d792f7cac03ef65de30cc0fbb2cae7","./views/resultsView.js":"eacdbc0d50ee3d2819f3ee59366c2773","./views/paginationView.js":"d2063f3e7de2e4cdacfcb5eb6479db05","./views/bookmarksView.js":"7ed9311e216aa789713f70ebeec3ed40","./views/addRecipeView.js":"4dd83c2a08c1751220d223c54dc70016"}],"140df4f8e97a45c53c66fead1f5a9e92":[function(require,module,exports) {
 var $ = require('../internals/export');
 
 var global = require('../internals/global');
@@ -4107,10 +4107,12 @@ const loadSearchResults = async function (query) {
 
 exports.loadSearchResults = loadSearchResults;
 
-const getSearchResultsPage = function (page = 1) {
+const getSearchResultsPage = function (page = state.search.page) {
   state.search.page = page;
   const start = (page - 1) * state.search.resultsPerPage;
   const end = page * state.search.resultsPerPage;
+  console.log(start, end);
+  console.log(state.search.results);
   return state.search.results.slice(start, end);
 };
 
@@ -5002,7 +5004,7 @@ class ResultsView extends _View.default {
 var _default = new ResultsView();
 
 exports.default = _default;
-},{"@babel/runtime/helpers/defineProperty":"0fe1617ef4d3c268577beb1e6641d4a5","./View.js":"61b7a1b097e16436be3d54c2f1828c73","url:../../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230","./previewView.js":"e4d6583325a8b6c9380670c4f233bf07"}],"e4d6583325a8b6c9380670c4f233bf07":[function(require,module,exports) {
+},{"@babel/runtime/helpers/defineProperty":"0fe1617ef4d3c268577beb1e6641d4a5","./View.js":"61b7a1b097e16436be3d54c2f1828c73","./previewView.js":"e4d6583325a8b6c9380670c4f233bf07","url:../../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230"}],"e4d6583325a8b6c9380670c4f233bf07":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

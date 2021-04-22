@@ -1,6 +1,14 @@
 .recipe {
   background-color: $color-grey-light-1;
 
+  .message {
+    display: block;
+
+    .message__image {
+      width: 300px;
+    }
+  }
+
   ///////////
   // FIGURE
   &__fig {

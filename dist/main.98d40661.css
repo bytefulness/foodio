@@ -480,6 +480,12 @@ body {
 .recipe {
   background-color: #f9f5f3;
 }
+.recipe .message {
+  display: block;
+}
+.recipe .message .message__image {
+  width: 300px;
+}
 .recipe__fig {
   height: 32rem;
   position: relative;
