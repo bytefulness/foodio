@@ -536,8 +536,14 @@ const controlAddBookmark = function () {
   _bookmarksView.default.render(model.state.bookmarks);
 };
 
+const controlBookmarks = function () {
+  _bookmarksView.default.render(model.state.bookmarks);
+};
+
 const init = function () {
   // Subscribers
+  _bookmarksView.default.addHandlerRender(controlBookmarks);
+
   _recipeView.default.addHandlerRender(controlRecipes);
 
   _recipeView.default.addHandlerUpdateServings(controlServings);
@@ -4081,6 +4087,10 @@ const updateServings = function (newServings) {
 
 exports.updateServings = updateServings;
 
+const persistBookmarks = function () {
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+};
+
 const addBookmark = function (recipe) {
   // Add bookmark
   state.bookmarks.push(recipe); // Mark current recipe as bookmarked
@@ -4088,6 +4098,8 @@ const addBookmark = function (recipe) {
   if (recipe.id === state.recipe.id) {
     state.recipe.bookmarked = true;
   }
+
+  persistBookmarks();
 };
 
 exports.addBookmark = addBookmark;
@@ -4098,9 +4110,17 @@ const deleteBookmark = function (id) {
   state.bookmarks.splice(index, 1); // Mark current recipe as NOT bookmarked
 
   if (id === state.recipe.id) state.recipe.bookmarked = false;
+  persistBookmarks();
 };
 
 exports.deleteBookmark = deleteBookmark;
+
+const init = function () {
+  const storage = localStorage.getItem('bookmarks');
+  if (storage) state.bookmarks = JSON.parse(storage);
+};
+
+init();
 },{"./config.js":"09212d541c5c40ff2bd93475a904f8de","./helper.js":"ca5e72bede557533b2de19db21a2a688"}],"09212d541c5c40ff2bd93475a904f8de":[function(require,module,exports) {
 "use strict";
 
@@ -5021,6 +5041,10 @@ class BookmarksView extends _View.default {
     (0, _defineProperty2.default)(this, "_parentElement", document.querySelector('.bookmarks__list'));
     (0, _defineProperty2.default)(this, "_errorMessage", `No recipes found for your bookmark list`);
     (0, _defineProperty2.default)(this, "_message", ``);
+  }
+
+  addHandlerRender(handler) {
+    window.addEventListener('load', handler);
   }
 
   _generateMarkup() {
