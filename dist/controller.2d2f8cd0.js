@@ -493,7 +493,7 @@ const controlSearchResults = async function () {
 
     await model.loadSearchResults(query); // 3) Render results
 
-    _resultsView.default.render(model.getSearchResults()); // Render initial pagination results
+    _resultsView.default.render(model.getSearchResultsPage()); // Render initial pagination results
 
 
     _paginationView.default.render(model.state.search);
@@ -504,7 +504,7 @@ const controlSearchResults = async function () {
 
 const controlPagination = function (goToPage) {
   // Render new results
-  _resultsView.default.render(model.getSearchResults(goToPage)); // Render new pagination buttons
+  _resultsView.default.render(model.getSearchResultsPage(goToPage)); // Render new pagination buttons
 
 
   _paginationView.default.render(model.state.search);
@@ -3984,7 +3984,7 @@ module.exports._relative = relative;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteBookmark = exports.addBookmark = exports.updateServings = exports.getSearchResults = exports.loadSearchResults = exports.loadRecipe = exports.state = void 0;
+exports.deleteBookmark = exports.addBookmark = exports.updateServings = exports.getSearchResultsPage = exports.loadSearchResults = exports.loadRecipe = exports.state = void 0;
 
 var _config = require("./config.js");
 
@@ -4056,14 +4056,14 @@ const loadSearchResults = async function (query) {
 
 exports.loadSearchResults = loadSearchResults;
 
-const getSearchResults = function (page = 1) {
+const getSearchResultsPage = function (page = 1) {
   state.search.page = page;
   const start = (page - 1) * state.search.resultsPerPage;
   const end = page * state.search.resultsPerPage;
   return state.search.results.slice(start, end);
 };
 
-exports.getSearchResults = getSearchResults;
+exports.getSearchResultsPage = getSearchResultsPage;
 
 const updateServings = function (newServings) {
   state.recipe.ingredients.forEach(ing => {

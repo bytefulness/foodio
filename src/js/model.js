@@ -66,7 +66,7 @@ export const loadSearchResults = async function (query) {
   }
 };
 
-export const getSearchResults = function (page = 1) {
+export const getSearchResultsPage = function (page = 1) {
   state.search.page = page;
 
   const start = (page - 1) * state.search.resultsPerPage;
