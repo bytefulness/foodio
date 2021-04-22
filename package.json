@@ -2,10 +2,10 @@
   "name": "foodio",
   "version": "1.0.0",
   "description": "Search delicious recipes to create tasty food",
-  "main": "index.html",
+  "default": "index.html",
   "scripts": {
     "start": "parcel serve index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --dist-dir ./build"
   },
   "repository": {
     "type": "git",
