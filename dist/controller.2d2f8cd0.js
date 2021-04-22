@@ -4027,26 +4027,30 @@ const state = {
 };
 exports.state = state;
 
+const createRecipeObject = function (data) {
+  // # Change object keyname format
+  // ## Define as let to change later
+  let {
+    recipe
+  } = data.data; // ## Change format
+
+  return {
+    id: recipe.id,
+    title: recipe.title,
+    publisher: recipe.publisher,
+    sourceUrl: recipe.source_url,
+    image: recipe.image_url,
+    servings: recipe.servings,
+    cookingTime: recipe.cooking_time,
+    ingredients: recipe.ingredients
+  };
+};
+
 const loadRecipe = async function (id) {
   try {
     // # Calling recipe from API
-    const data = await (0, _helper.getJSON)(`${_config.API_URL}${id}`); // # Change object keyname format
-    // ## Define as let to change later
-
-    let {
-      recipe
-    } = data.data; // ## Change format
-
-    state.recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      publisher: recipe.publisher,
-      sourceUrl: recipe.source_url,
-      image: recipe.image_url,
-      servings: recipe.servings,
-      cookingTime: recipe.cooking_time,
-      ingredients: recipe.ingredients
-    };
+    const data = await (0, _helper.getJSON)(`${_config.API_URL}${id}`);
+    state.recipe = createRecipeObject(data);
 
     if (state.bookmarks.some(bookmark => bookmark.id === id)) {
       state.recipe.bookmarked = true;
@@ -4101,7 +4105,6 @@ exports.updateServings = updateServings;
 
 const uploadRecipe = async function (newRecipe) {
   try {
-    console.log(newRecipe);
     const ingredients = Object.entries(newRecipe).filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '').map(ing => {
       const ingArr = ing[1].replaceAll(' ', '').split(',');
       if (ingArr.length !== 3) throw new Error('Wrong ingredient format! Please use the correct one');
@@ -4121,9 +4124,11 @@ const uploadRecipe = async function (newRecipe) {
       servings: +newRecipe.servings,
       ingredients
     };
-    console.log(ingredients);
-    console.log(recipe);
-  } catch (error) {}
+    const data = await (0, _helper.sendJSON)(`${_config.API_URL}?key=${KEY}`, recipe);
+    state.recipe = createRecipeObject(data);
+  } catch (error) {
+    throw error;
+  }
 };
 
 exports.uploadRecipe = uploadRecipe;
@@ -4168,20 +4173,22 @@ init();
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.RES_PER_PAGE = exports.TIMEOUT_SEC = exports.API_URL = void 0;
+exports.KEY = exports.RES_PER_PAGE = exports.TIMEOUT_SEC = exports.API_URL = void 0;
 const API_URL = 'https://forkify-api.herokuapp.com/api/v2/recipes/';
 exports.API_URL = API_URL;
 const TIMEOUT_SEC = 10;
 exports.TIMEOUT_SEC = TIMEOUT_SEC;
 const RES_PER_PAGE = 10;
 exports.RES_PER_PAGE = RES_PER_PAGE;
+const KEY = '270ed3a0-2745-4fb8-8265-9b9fded8fd33';
+exports.KEY = KEY;
 },{}],"ca5e72bede557533b2de19db21a2a688":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getJSON = void 0;
+exports.sendJSON = exports.getJSON = void 0;
 
 var _config = require("./config.js");
 
@@ -4205,6 +4212,26 @@ const getJSON = async function (url) {
 };
 
 exports.getJSON = getJSON;
+
+const sendJSON = async function (url, uploadData) {
+  try {
+    const fetchPro = fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(uploadData)
+    });
+    const res = await Promise.race([fetchPro, timeout(_config.TIMEOUT_SEC)]);
+    const data = res.json();
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+exports.sendJSON = sendJSON;
 },{"./config.js":"09212d541c5c40ff2bd93475a904f8de"}],"bcae1aced0301b01ccacb3e6f7dfede8":[function(require,module,exports) {
 "use strict";
 

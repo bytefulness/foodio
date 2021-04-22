@@ -1,5 +1,5 @@
 import { API_URL, RES_PER_PAGE } from './config.js';
-import { getJSON } from './helper.js';
+import { getJSON, sendJSON } from './helper.js';
 
 export const state = {
   recipe: {},
@@ -12,27 +12,30 @@ export const state = {
   bookmarks: [],
 };
 
+const createRecipeObject = function (data) {
+  // # Change object keyname format
+
+  // ## Define as let to change later
+  let { recipe } = data.data;
+
+  // ## Change format
+  return {
+    id: recipe.id,
+    title: recipe.title,
+    publisher: recipe.publisher,
+    sourceUrl: recipe.source_url,
+    image: recipe.image_url,
+    servings: recipe.servings,
+    cookingTime: recipe.cooking_time,
+    ingredients: recipe.ingredients,
+  };
+};
+
 export const loadRecipe = async function (id) {
   try {
     // # Calling recipe from API
     const data = await getJSON(`${API_URL}${id}`);
-
-    // # Change object keyname format
-
-    // ## Define as let to change later
-    let { recipe } = data.data;
-
-    // ## Change format
-    state.recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      publisher: recipe.publisher,
-      sourceUrl: recipe.source_url,
-      image: recipe.image_url,
-      servings: recipe.servings,
-      cookingTime: recipe.cooking_time,
-      ingredients: recipe.ingredients,
-    };
+    state.recipe = createRecipeObject(data);
 
     if (state.bookmarks.some(bookmark => bookmark.id === id)) {
       state.recipe.bookmarked = true;
@@ -85,7 +88,6 @@ export const updateServings = function (newServings) {
 
 export const uploadRecipe = async function (newRecipe) {
   try {
-    console.log(newRecipe);
     const ingredients = Object.entries(newRecipe)
       .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
       .map(ing => {
@@ -109,9 +111,12 @@ export const uploadRecipe = async function (newRecipe) {
       servings: +newRecipe.servings,
       ingredients,
     };
-    console.log(ingredients);
-    console.log(recipe);
-  } catch (error) {}
+
+    const data = await sendJSON(`${API_URL}?key=${KEY}`, recipe);
+    state.recipe = createRecipeObject(data);
+  } catch (error) {
+    throw error;
+  }
 };
 
 const persistBookmarks = function () {
