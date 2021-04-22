@@ -553,7 +553,13 @@ const controlAddRecipe = async function (newRecipe) {
     _recipeView.default.render(model.state.recipe); // Succes message
 
 
-    _addRecipeView.default.renderMessage();
+    _addRecipeView.default.renderMessage(); // Render bookmark view
+
+
+    _bookmarksView.default.render(model.state.bookmarks); // Change ID in url
+
+
+    window.history.pushState(null, '', `${model.state.recipe.id}`);
   } catch (error) {
     _addRecipeView.default.renderError(error.message);
   }
@@ -4062,7 +4068,7 @@ const createRecipeObject = function (data) {
 const loadRecipe = async function (id) {
   try {
     // # Calling recipe from API
-    const data = await (0, _helper.getJSON)(`${_config.API_URL}${id}`);
+    const data = await (0, _helper.AJAX)(`${_config.API_URL}${id}?key=${_config.KEY}`);
     state.recipe = createRecipeObject(data);
 
     if (state.bookmarks.some(bookmark => bookmark.id === id)) {
@@ -4081,13 +4087,16 @@ const loadSearchResults = async function (query) {
   try {
     state.search.query = query; // # Calling results from API
 
-    const data = await (0, _helper.getJSON)(`${_config.API_URL}?search=${query}`);
+    const data = await (0, _helper.AJAX)(`${_config.API_URL}?search=${query}&key=${_config.KEY}`);
     state.search.results = data.data.recipes.map(recipe => {
       return {
         id: recipe.id,
         title: recipe.title,
         publisher: recipe.publisher,
-        image: recipe.image_url
+        image: recipe.image_url,
+        ...(recipe.key && {
+          key: recipe
+        })
       };
     });
     state.search.page = 1;
@@ -4119,7 +4128,8 @@ exports.updateServings = updateServings;
 const uploadRecipe = async function (newRecipe) {
   try {
     const ingredients = Object.entries(newRecipe).filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '').map(ing => {
-      const ingArr = ing[1].replaceAll(' ', '').split(',');
+      const ingArr = ing[1].split(',').map(el => el.trim()); // const ingArr = ing[1].replaceAll(' ', '').split(',');
+
       if (ingArr.length !== 3) throw new Error('Wrong ingredient format! Please use the correct one');
       const [quantity, unit, description] = ingArr;
       return {
@@ -4137,7 +4147,7 @@ const uploadRecipe = async function (newRecipe) {
       servings: +newRecipe.servings,
       ingredients
     };
-    const data = await (0, _helper.sendJSON)(`${_config.API_URL}?key=${_config.KEY}`, recipe);
+    const data = await (0, _helper.AJAX)(`${_config.API_URL}?key=${_config.KEY}`, recipe);
     state.recipe = createRecipeObject(data);
     addBookmark(state.recipe);
   } catch (error) {
@@ -4204,7 +4214,7 @@ exports.MODAL_CLOSE_SEC = MODAL_CLOSE_SEC;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sendJSON = exports.getJSON = void 0;
+exports.AJAX = void 0;
 
 var _config = require("./config.js");
 
@@ -4216,9 +4226,17 @@ const timeout = function (s) {
   });
 };
 
-const getJSON = async function (url) {
+const AJAX = async function (url, uploadData = undefined) {
   try {
-    const res = await Promise.race([fetch(url), timeout(_config.TIMEOUT_SEC)]);
+    const fetchPro = uploadData ? fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(uploadData)
+    }) : fetch(url);
+    const res = await Promise.race([fetchPro, timeout(_config.TIMEOUT_SEC)]); // We do that because posting data to API will return the data we just post.
+
     const data = await res.json();
     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
     return data;
@@ -4226,28 +4244,42 @@ const getJSON = async function (url) {
     throw error;
   }
 };
-
-exports.getJSON = getJSON;
-
-const sendJSON = async function (url, uploadData) {
+/* export const getJSON = async function (url) {
   try {
-    const fetchPro = fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(uploadData)
-    });
-    const res = await Promise.race([fetchPro, timeout(_config.TIMEOUT_SEC)]);
-    const data = res.json();
+    const res = await Promise.race([fetch(url), timeout(TIMEOUT_SEC)]);
+    const data = await res.json();
+
     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+
     return data;
   } catch (error) {
     throw error;
   }
 };
 
-exports.sendJSON = sendJSON;
+export const sendJSON = async function (url, uploadData) {
+  try {
+    const fetchPro = fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(uploadData),
+    });
+
+    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
+    const data = res.json();
+
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+*/
+
+
+exports.AJAX = AJAX;
 },{"./config.js":"09212d541c5c40ff2bd93475a904f8de"}],"bcae1aced0301b01ccacb3e6f7dfede8":[function(require,module,exports) {
 "use strict";
 
@@ -5192,9 +5224,7 @@ class AddRecipeView extends _View.default {
     this._parentElement.addEventListener('submit', function (e) {
       e.preventDefault();
       const dataArr = [...new FormData(this)];
-      console.log(dataArr);
       const data = Object.fromEntries(dataArr);
-      console.log(data);
       handler(data);
     });
   }
