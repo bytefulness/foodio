@@ -1,4 +1,4 @@
-import { API_URL, RES_PER_PAGE } from './config.js';
+import { API_URL, RES_PER_PAGE, KEY } from './config.js';
 import { getJSON, sendJSON } from './helper.js';
 
 export const state = {
@@ -28,6 +28,8 @@ const createRecipeObject = function (data) {
     servings: recipe.servings,
     cookingTime: recipe.cooking_time,
     ingredients: recipe.ingredients,
+    // If there is recipe.key add to the object
+    ...(recipe.key && { key: recipe.key }),
   };
 };
 
@@ -114,6 +116,7 @@ export const uploadRecipe = async function (newRecipe) {
 
     const data = await sendJSON(`${API_URL}?key=${KEY}`, recipe);
     state.recipe = createRecipeObject(data);
+    addBookmark(state.recipe);
   } catch (error) {
     throw error;
   }

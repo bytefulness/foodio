@@ -449,6 +449,8 @@ var _icons = _interopRequireDefault(require("url:../img/icons.svg"));
 
 var model = _interopRequireWildcard(require("./model.js"));
 
+var _config = require("./config");
+
 var _recipeView = _interopRequireDefault(require("./views/recipeView.js"));
 
 var _searchView = _interopRequireDefault(require("./views/searchView.js"));
@@ -544,7 +546,14 @@ const controlBookmarks = function () {
 
 const controlAddRecipe = async function (newRecipe) {
   try {
+    _addRecipeView.default.renderSpinner();
+
     await model.uploadRecipe(newRecipe);
+
+    _recipeView.default.render(model.state.recipe); // Succes message
+
+
+    _addRecipeView.default.renderMessage();
   } catch (error) {
     _addRecipeView.default.renderError(error.message);
   }
@@ -568,7 +577,7 @@ const init = function () {
 };
 
 init();
-},{"core-js/modules/web.immediate.js":"140df4f8e97a45c53c66fead1f5a9e92","core-js/modules/web.url.js":"a66c25e402880ea6b966ee8ece30b6df","core-js/modules/web.url.to-json.js":"6357c5a053a36e38c0e24243e550dd86","core-js/modules/web.url-search-params.js":"2494aebefd4ca447de0ef4cfdd47509e","url:../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230","./model.js":"aabf248f40f7693ef84a0cb99f385d1f","./views/recipeView.js":"bcae1aced0301b01ccacb3e6f7dfede8","./views/searchView.js":"c5d792f7cac03ef65de30cc0fbb2cae7","./views/resultsView.js":"eacdbc0d50ee3d2819f3ee59366c2773","./views/paginationView.js":"d2063f3e7de2e4cdacfcb5eb6479db05","./views/bookmarksView.js":"7ed9311e216aa789713f70ebeec3ed40","./views/addRecipeView.js":"4dd83c2a08c1751220d223c54dc70016"}],"140df4f8e97a45c53c66fead1f5a9e92":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"140df4f8e97a45c53c66fead1f5a9e92","core-js/modules/web.url.js":"a66c25e402880ea6b966ee8ece30b6df","core-js/modules/web.url.to-json.js":"6357c5a053a36e38c0e24243e550dd86","core-js/modules/web.url-search-params.js":"2494aebefd4ca447de0ef4cfdd47509e","url:../img/icons.svg":"5e5c43dbb4c165e8ff3d97dbdb246230","./model.js":"aabf248f40f7693ef84a0cb99f385d1f","./views/recipeView.js":"bcae1aced0301b01ccacb3e6f7dfede8","./views/searchView.js":"c5d792f7cac03ef65de30cc0fbb2cae7","./views/resultsView.js":"eacdbc0d50ee3d2819f3ee59366c2773","./views/paginationView.js":"d2063f3e7de2e4cdacfcb5eb6479db05","./views/bookmarksView.js":"7ed9311e216aa789713f70ebeec3ed40","./views/addRecipeView.js":"4dd83c2a08c1751220d223c54dc70016","./config":"09212d541c5c40ff2bd93475a904f8de"}],"140df4f8e97a45c53c66fead1f5a9e92":[function(require,module,exports) {
 var $ = require('../internals/export');
 
 var global = require('../internals/global');
@@ -4042,7 +4051,11 @@ const createRecipeObject = function (data) {
     image: recipe.image_url,
     servings: recipe.servings,
     cookingTime: recipe.cooking_time,
-    ingredients: recipe.ingredients
+    ingredients: recipe.ingredients,
+    // If there is recipe.key add to the object
+    ...(recipe.key && {
+      key: recipe.key
+    })
   };
 };
 
@@ -4124,8 +4137,9 @@ const uploadRecipe = async function (newRecipe) {
       servings: +newRecipe.servings,
       ingredients
     };
-    const data = await (0, _helper.sendJSON)(`${_config.API_URL}?key=${KEY}`, recipe);
+    const data = await (0, _helper.sendJSON)(`${_config.API_URL}?key=${_config.KEY}`, recipe);
     state.recipe = createRecipeObject(data);
+    addBookmark(state.recipe);
   } catch (error) {
     throw error;
   }
@@ -4173,7 +4187,7 @@ init();
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.KEY = exports.RES_PER_PAGE = exports.TIMEOUT_SEC = exports.API_URL = void 0;
+exports.MODAL_CLOSE_SEC = exports.KEY = exports.RES_PER_PAGE = exports.TIMEOUT_SEC = exports.API_URL = void 0;
 const API_URL = 'https://forkify-api.herokuapp.com/api/v2/recipes/';
 exports.API_URL = API_URL;
 const TIMEOUT_SEC = 10;
@@ -4182,6 +4196,8 @@ const RES_PER_PAGE = 10;
 exports.RES_PER_PAGE = RES_PER_PAGE;
 const KEY = '270ed3a0-2745-4fb8-8265-9b9fded8fd33';
 exports.KEY = KEY;
+const MODAL_CLOSE_SEC = 2.5;
+exports.MODAL_CLOSE_SEC = MODAL_CLOSE_SEC;
 },{}],"ca5e72bede557533b2de19db21a2a688":[function(require,module,exports) {
 "use strict";
 
@@ -5145,6 +5161,7 @@ class AddRecipeView extends _View.default {
   constructor() {
     super();
     (0, _defineProperty2.default)(this, "_parentElement", document.querySelector('.upload'));
+    (0, _defineProperty2.default)(this, "_message", 'Recipe was succesfully uploaded');
     (0, _defineProperty2.default)(this, "_window", document.querySelector('.add-recipe-window'));
     (0, _defineProperty2.default)(this, "_overlay", document.querySelector('.overlay'));
     (0, _defineProperty2.default)(this, "_btnOpen", document.querySelector('.nav__btn--add-recipe'));

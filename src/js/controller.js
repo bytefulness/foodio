@@ -4,6 +4,7 @@ import 'regenerator-runtime/runtime';
 // # Import Modules
 import icons from 'url:../img/icons.svg';
 import * as model from './model.js';
+import { MODAL_CLOSE_SEC } from './config';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
@@ -89,7 +90,13 @@ const controlBookmarks = function () {
 
 const controlAddRecipe = async function (newRecipe) {
   try {
+    addRecipeView.renderSpinner();
+
     await model.uploadRecipe(newRecipe);
+    recipeView.render(model.state.recipe);
+
+    // Succes message
+    addRecipeView.renderMessage();
   } catch (error) {
     addRecipeView.renderError(error.message);
   }
